@@ -49,6 +49,30 @@ const CONFIG = {
     ],
 
     /* --------------------------------------------------------
+        MEDIA PARTNERS / CLIENTS
+        
+        Just add the image filename. Example: "times-of-india.png"
+        Images should be in: assets/media-logos/
+     -------------------------------------------------------- */
+    partners: [
+        "abp.png",
+        "ajkaal.png",
+        "bartaman.png",
+        "eisamay.png",
+        "eoi.png",
+        "lipi.png",
+        "pratidin.png",
+        "stateman.png",
+        "sukhbor.png",
+        "telegraph.png",
+        "toi.png",
+        "ekdin.png",
+        "vishwamitra.png",
+        "dainiksambad.png"
+    ],
+
+
+    /* --------------------------------------------------------
        NAVBAR SCROLL
        px to trigger scroll effect
     -------------------------------------------------------- */
@@ -119,6 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initCallDropdown();
     initExternalLinks();
     fixMobileMenuButtons();
+    initMediaPartners();
 });
 
 /* ============================================================
@@ -458,9 +483,9 @@ function initFAQ() {
         question.setAttribute("aria-expanded", "false");
 
         /* Check if this should be auto-opened */
-        const initiallyOpen = item.classList.contains("active") || 
-                            item.classList.contains("open") ||
-                            (CONFIG.faqAutoOpenFirst && index === 0);
+        const initiallyOpen = item.classList.contains("active") ||
+            item.classList.contains("open") ||
+            (CONFIG.faqAutoOpenFirst && index === 0);
 
         if (initiallyOpen) {
             item.classList.add("active");
@@ -836,6 +861,185 @@ document.addEventListener("visibilitychange", () => {
 
 if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
     console.log("Internet Communication website loaded successfully.");
+}
+
+/* ============================================================
+   MEDIA PARTNERS - FULLY DYNAMIC RENDER (FIXED - NO LAZY LOAD)
+   ============================================================ */
+
+function initMediaPartners() {
+    const track = document.getElementById('partnerTrack');
+
+    if (!track) {
+        return;
+    }
+
+    const partners = CONFIG.partners || [];
+
+    // If no partners, show a message
+    if (partners.length === 0) {
+        const wrapper = document.querySelector('.partners-track-wrapper');
+        if (wrapper) {
+            wrapper.innerHTML = `
+                <div class="no-partners-message">
+                    <span>📰</span>
+                    Adding media partners soon...
+                </div>
+            `;
+            wrapper.style.padding = '40px 0';
+        }
+        return;
+    }
+
+    // Create items - NO DUPLICATES
+    const itemsHTML = createPartnerItems(partners);
+    track.innerHTML = itemsHTML;
+
+    // Initially pause the animation
+    track.style.animationPlayState = 'paused';
+
+    // Get all images
+    const images = track.querySelectorAll('img');
+    const totalImages = images.length;
+
+    // Preload images and track loading
+    let loadedCount = 0;
+    let imagesLoaded = false;
+
+    function checkAllLoaded() {
+        loadedCount++;
+        if (loadedCount >= totalImages && !imagesLoaded) {
+            imagesLoaded = true;
+            // All images loaded, start animation
+            startAnimation();
+        }
+    }
+
+    function startAnimation() {
+        // Calculate and start animation
+        updateAnimationSettings();
+        track.style.animationPlayState = 'running';
+        console.log(`✅ All ${totalImages} partner logos loaded! Animation started.`);
+    }
+
+    // If no images, start immediately
+    if (totalImages === 0) {
+        startAnimation();
+        return;
+    }
+
+    // Force load each image
+    images.forEach(img => {
+        // Remove lazy loading to ensure immediate load
+        img.removeAttribute('loading');
+        
+        // If image already loaded
+        if (img.complete && img.naturalHeight !== 0) {
+            checkAllLoaded();
+        } else {
+            // Set up load event
+            img.addEventListener('load', checkAllLoaded);
+            img.addEventListener('error', checkAllLoaded);
+            
+            // Force reload if already in cache but not complete
+            if (img.complete && img.naturalHeight === 0) {
+                // Image failed to load
+                checkAllLoaded();
+            }
+        }
+    });
+
+    // Fallback: Start after max 3 seconds regardless
+    const fallbackTimer = setTimeout(() => {
+        if (!imagesLoaded) {
+            console.warn(`⚠️ ${totalImages - loadedCount} images not loaded after 3s. Starting animation anyway.`);
+            startAnimation();
+        }
+    }, 3000);
+
+    // Override startAnimation to clear fallback
+    const originalStart = startAnimation;
+    startAnimation = function() {
+        clearTimeout(fallbackTimer);
+        originalStart();
+    };
+
+    // Recalculate on resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (track.style.animationPlayState !== 'paused') {
+                updateAnimationSettings();
+            }
+        }, 250);
+    });
+
+    // Pause animation on hover
+    const wrapper = document.querySelector('.partners-track-wrapper');
+    if (wrapper) {
+        wrapper.addEventListener('mouseenter', () => {
+            track.style.animationPlayState = 'paused';
+        });
+        wrapper.addEventListener('mouseleave', () => {
+            track.style.animationPlayState = 'running';
+        });
+    }
+}
+
+/* ============================================================
+   UPDATE ANIMATION SETTINGS
+   ============================================================ */
+
+function updateAnimationSettings() {
+    const track = document.getElementById('partnerTrack');
+    if (!track) return;
+
+    const partners = CONFIG.partners || [];
+    if (partners.length === 0) return;
+
+    // Get actual track width
+    const trackWidth = track.scrollWidth;
+    const viewportWidth = track.parentElement.clientWidth;
+    
+    // Calculate how much to scroll to show all logos
+    let scrollPercentage = 0;
+    if (trackWidth > viewportWidth) {
+        scrollPercentage = ((trackWidth - viewportWidth) / trackWidth) * 100;
+        // Add a small buffer so last logos are fully visible
+        scrollPercentage = Math.min(scrollPercentage + 5, 85);
+    }
+    
+    // Set the scroll distance as CSS variable
+    track.style.setProperty('--scroll-distance', `-${scrollPercentage}%`);
+    
+    // Calculate animation duration based on number of logos
+    const baseDuration = Math.max(20, partners.length * 2.5);
+    track.style.setProperty('--animation-duration', `${baseDuration}s`);
+    
+    console.log(`📊 Partners: ${partners.length} | Scroll: ${scrollPercentage.toFixed(1)}% | Duration: ${baseDuration}s`);
+}
+
+/* ============================================================
+   CREATE PARTNER ITEMS HTML - REMOVED LAZY LOADING
+   ============================================================ */
+
+function createPartnerItems(partners) {
+    return partners.map(filename => {
+        const name = filename.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
+        const imagePath = `assets/media-logos/${filename}`;
+
+        return `
+            <div class="partner-item">
+                <img 
+                    src="${imagePath}" 
+                    alt="${name}"
+                    title="${name}"
+                    onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\\'partner-name\\'>${name}</span>';"
+                >
+            </div>
+        `;
+    }).join('');
 }
 
 /* ============================================================
