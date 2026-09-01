@@ -1,52 +1,28 @@
 /* ============================================================
    MAIN.JS
+
+   Internet Communication
    Advertising Agency Website
-   ============================================================
 
    Handles:
    - Mobile navigation
    - Smooth scrolling
-   - Active navigation links
-   - Navbar scroll behavior
+   - Active navigation
+   - Navbar scroll effect
    - Scroll reveal animations
-   - Animated statistics counters
    - FAQ accordion
    - Scroll-to-top button
-   - Floating call button
    - Loading screen
-   - Contact form validation
-   - Form feedback
+   - Contact information
+   - Dynamic phone number dropdown
    - Current year
    - Accessibility / reduced motion
    ============================================================ */
 
 
 /* ============================================================
-   1. DOM READY
-   ============================================================ */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    initMobileNavigation();
-    initSmoothScrolling();
-    initNavbarScroll();
-    initScrollReveal();
-    initCounters();
-    initFAQ();
-    initScrollToTop();
-    initLoadingScreen();
-    initContactForm();
-    initCurrentYear();
-    initCallButton();
-    initBackToTopVisibility();
-    initCallDropdown();
-
-});
-
-
-/* ============================================================
-   2. GLOBAL VARIABLES
-   ============================================================ */
+   1. GLOBAL VARIABLES
+============================================================ */
 
 const body = document.body;
 
@@ -56,101 +32,167 @@ const prefersReducedMotion = window.matchMedia(
 
 
 /* ============================================================
+   2. DOM READY
+============================================================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    initMobileNavigation();
+
+    initSmoothScrolling();
+
+    initNavbarScroll();
+
+    initActiveNavigation();
+
+    initScrollReveal();
+
+    initFAQ();
+
+    initScrollToTop();
+
+    initBackToTopVisibility();
+
+    initLoadingScreen();
+
+    initCurrentYear();
+
+    initCallButton();
+
+    initCallDropdown();
+
+    initExternalLinks();
+
+    fixMobileMenuButtons();
+
+});
+
+
+/* ============================================================
    3. MOBILE NAVIGATION
-   ============================================================ */
+
+   Matches current HTML:
+
+   .nav-toggle
+   .nav-menu
+============================================================ */
 
 function initMobileNavigation() {
 
-    const menuToggle =
-        document.querySelector(".menu-toggle") ||
-        document.querySelector(".mobile-menu-toggle") ||
-        document.querySelector(".hamburger");
+    const menuToggle = document.querySelector(".nav-toggle");
 
-    const navLinks =
-        document.querySelector(".nav-links");
+    const navMenu = document.querySelector(".nav-menu");
 
-    if (!menuToggle || !navLinks) {
+    if (!menuToggle || !navMenu) {
         return;
     }
 
 
-    /* ---------- Toggle menu ---------- */
+    /* --------------------------------------------------------
+       Toggle menu
+    -------------------------------------------------------- */
 
-    menuToggle.addEventListener("click", () => {
+    menuToggle.addEventListener("click", (event) => {
+
+        event.stopPropagation();
 
         const isOpen =
-            navLinks.classList.contains("active") ||
-            navLinks.classList.contains("open") ||
-            navLinks.classList.contains("show");
+            navMenu.classList.contains("active");
 
         if (isOpen) {
+
             closeMobileMenu();
+
         } else {
+
             openMobileMenu();
+
         }
 
     });
 
 
-    /* ---------- Close menu after clicking link ---------- */
+    /* --------------------------------------------------------
+       Close menu after clicking navigation link
 
-    const links = navLinks.querySelectorAll("a");
+       This includes:
+       - Home
+       - About Us
+       - Services
+       - Why Choose Us
+       - How It Works
+       - Call Now
+       - Contact Now
+    -------------------------------------------------------- */
 
-    links.forEach(link => {
+    const navLinks = navMenu.querySelectorAll("a");
+
+    navLinks.forEach(link => {
 
         link.addEventListener("click", () => {
+
             closeMobileMenu();
+
         });
 
     });
 
 
-    /* ---------- Close when clicking outside ---------- */
+    /* --------------------------------------------------------
+       Close when clicking outside
+    -------------------------------------------------------- */
 
     document.addEventListener("click", event => {
 
-        const clickedInsideMenu =
-            navLinks.contains(event.target);
-
-        const clickedToggle =
-            menuToggle.contains(event.target);
-
         if (
-            !clickedInsideMenu &&
-            !clickedToggle &&
-            navLinks.classList.contains("active")
+            !navMenu.contains(event.target) &&
+            !menuToggle.contains(event.target)
         ) {
+
             closeMobileMenu();
+
         }
 
     });
 
 
-    /* ---------- Close with Escape ---------- */
+    /* --------------------------------------------------------
+       Close with Escape
+    -------------------------------------------------------- */
 
     document.addEventListener("keydown", event => {
 
         if (event.key === "Escape") {
+
             closeMobileMenu();
+
         }
 
     });
 
 
-    /* ---------- Close when resizing to desktop ---------- */
+    /* --------------------------------------------------------
+       Close when switching to desktop
+    -------------------------------------------------------- */
 
     window.addEventListener("resize", () => {
 
         if (window.innerWidth > 767) {
+
             closeMobileMenu();
+
         }
 
     });
 
 
+    /* --------------------------------------------------------
+       Open menu
+    -------------------------------------------------------- */
+
     function openMobileMenu() {
 
-        navLinks.classList.add("active");
+        navMenu.classList.add("active");
 
         menuToggle.classList.add("active");
 
@@ -159,22 +201,38 @@ function initMobileNavigation() {
             "true"
         );
 
+        menuToggle.setAttribute(
+            "aria-label",
+            "Close navigation menu"
+        );
+
         body.classList.add("menu-open");
 
     }
 
 
+    /* --------------------------------------------------------
+       Close menu
+    -------------------------------------------------------- */
+
     function closeMobileMenu() {
 
-        navLinks.classList.remove("active");
-        navLinks.classList.remove("open");
-        navLinks.classList.remove("show");
+        navMenu.classList.remove("active");
+
+        navMenu.classList.remove("open");
+
+        navMenu.classList.remove("show");
 
         menuToggle.classList.remove("active");
 
         menuToggle.setAttribute(
             "aria-expanded",
             "false"
+        );
+
+        menuToggle.setAttribute(
+            "aria-label",
+            "Open navigation menu"
         );
 
         body.classList.remove("menu-open");
@@ -185,8 +243,116 @@ function initMobileNavigation() {
 
 
 /* ============================================================
+   MOBILE MENU CTA VISIBILITY
+
+   Ensures "Call Now" and "Contact Now" remain visible
+   inside the mobile burger menu.
+============================================================ */
+
+function fixMobileMenuButtons() {
+
+    const navMenu = document.querySelector(".nav-menu");
+
+    if (!navMenu) {
+        return;
+    }
+
+    const buttons = navMenu.querySelectorAll(
+        ".nav-cta"
+    );
+
+    if (buttons.length === 0) {
+        return;
+    }
+
+    const updateButtons = () => {
+
+        if (window.innerWidth <= 767) {
+
+            buttons.forEach(button => {
+
+                /* Make button visible */
+                button.style.display = "flex";
+
+                button.style.alignItems = "center";
+
+                button.style.justifyContent = "center";
+
+                /* Button appearance */
+                button.style.backgroundColor = "#12355b";
+
+                button.style.color = "#ffffff";
+
+                button.style.border = "1px solid #12355b";
+
+                button.style.opacity = "1";
+
+                button.style.visibility = "visible";
+
+                /* Spacing */
+                button.style.width = "100%";
+
+                button.style.marginTop = "8px";
+
+                button.style.padding = "12px 20px";
+
+                button.style.position = "relative";
+
+                button.style.zIndex = "10";
+
+            });
+
+        } else {
+
+            /* Return control to CSS on desktop */
+
+            buttons.forEach(button => {
+
+                button.style.display = "";
+
+                button.style.alignItems = "";
+
+                button.style.justifyContent = "";
+
+                button.style.backgroundColor = "";
+
+                button.style.color = "";
+
+                button.style.border = "";
+
+                button.style.opacity = "";
+
+                button.style.visibility = "";
+
+                button.style.width = "";
+
+                button.style.marginTop = "";
+
+                button.style.padding = "";
+
+                button.style.position = "";
+
+                button.style.zIndex = "";
+
+            });
+
+        }
+
+    };
+
+    updateButtons();
+
+    window.addEventListener(
+        "resize",
+        updateButtons
+    );
+
+}
+
+
+/* ============================================================
    4. SMOOTH SCROLLING
-   ============================================================ */
+============================================================ */
 
 function initSmoothScrolling() {
 
@@ -218,17 +384,31 @@ function initSmoothScrolling() {
 
             event.preventDefault();
 
-            const navbar =
-                document.querySelector(".navbar") ||
+
+            /* ------------------------------------------------
+               Header height
+            ------------------------------------------------ */
+
+            const header =
                 document.querySelector(".header");
 
-            const navbarHeight =
-                navbar ? navbar.offsetHeight : 0;
+            const headerHeight =
+                header ? header.offsetHeight : 0;
+
+
+            /* ------------------------------------------------
+               Calculate target position
+            ------------------------------------------------ */
 
             const targetPosition =
                 target.getBoundingClientRect().top +
                 window.scrollY -
-                navbarHeight;
+                headerHeight;
+
+
+            /* ------------------------------------------------
+               Scroll
+            ------------------------------------------------ */
 
             if (prefersReducedMotion) {
 
@@ -240,11 +420,19 @@ function initSmoothScrolling() {
             } else {
 
                 window.scrollTo({
+
                     top: targetPosition,
+
                     behavior: "smooth"
+
                 });
 
             }
+
+
+            /* ------------------------------------------------
+               Update URL
+            ------------------------------------------------ */
 
             history.replaceState(
                 null,
@@ -261,33 +449,35 @@ function initSmoothScrolling() {
 
 /* ============================================================
    5. NAVBAR SCROLL EFFECT
-   ============================================================ */
+============================================================ */
 
 function initNavbarScroll() {
 
-    const navbar =
-        document.querySelector(".navbar") ||
+    const header =
         document.querySelector(".header");
 
-    if (!navbar) {
+    if (!header) {
         return;
     }
 
-    const updateNavbar = () => {
+
+    function updateNavbar() {
 
         if (window.scrollY > 50) {
 
-            navbar.classList.add("scrolled");
+            header.classList.add("scrolled");
 
         } else {
 
-            navbar.classList.remove("scrolled");
+            header.classList.remove("scrolled");
 
         }
 
-    };
+    }
+
 
     updateNavbar();
+
 
     window.addEventListener(
         "scroll",
@@ -299,17 +489,19 @@ function initNavbarScroll() {
 
 
 /* ============================================================
-   6. ACTIVE NAVIGATION LINK
-   ============================================================ */
+   6. ACTIVE NAVIGATION
+============================================================ */
 
 function initActiveNavigation() {
 
     const sections =
-        document.querySelectorAll("section[id]");
+        document.querySelectorAll(
+            "section[id]"
+        );
 
     const navLinks =
         document.querySelectorAll(
-            '.nav-links a[href^="#"]'
+            '.nav-menu a[href^="#"]'
         );
 
     if (
@@ -319,6 +511,7 @@ function initActiveNavigation() {
         return;
     }
 
+
     const observer =
         new IntersectionObserver(
             entries => {
@@ -329,18 +522,29 @@ function initActiveNavigation() {
                         return;
                     }
 
+
                     const id =
-                        entry.target.getAttribute("id");
+                        entry.target.getAttribute(
+                            "id"
+                        );
+
 
                     navLinks.forEach(link => {
 
-                        link.classList.remove("active");
+                        link.classList.remove(
+                            "active"
+                        );
+
 
                         if (
                             link.getAttribute("href") ===
                             `#${id}`
                         ) {
-                            link.classList.add("active");
+
+                            link.classList.add(
+                                "active"
+                            );
+
                         }
 
                     });
@@ -349,12 +553,16 @@ function initActiveNavigation() {
 
             },
             {
-                rootMargin: "-35% 0px -55% 0px"
+                rootMargin:
+                    "-35% 0px -55% 0px"
             }
         );
 
+
     sections.forEach(section => {
+
         observer.observe(section);
+
     });
 
 }
@@ -362,44 +570,69 @@ function initActiveNavigation() {
 
 /* ============================================================
    7. SCROLL REVEAL ANIMATIONS
-   ============================================================ */
+============================================================ */
 
 function initScrollReveal() {
 
-    const elements = document.querySelectorAll(
-        ".reveal, " +
-        ".fade-in, " +
-        ".service-card, " +
-        ".feature-card, " +
-        ".stat-card, " +
-        ".client-card, " +
-        ".process-item, " +
-        ".why-feature, " +
-        ".faq-item"
-    );
+    const elements =
+        document.querySelectorAll(
+            ".reveal, " +
+            ".service-card, " +
+            ".feature-card, " +
+            ".stat-card, " +
+            ".client-card, " +
+            ".step, " +
+            ".why-copy, " +
+            ".check-list, " +
+            ".faq-item"
+        );
 
-    if (
-        elements.length === 0 ||
-        prefersReducedMotion
-    ) {
+
+    if (elements.length === 0) {
+        return;
+    }
+
+
+    /* --------------------------------------------------------
+       Reduced motion
+
+       Immediately show everything.
+    -------------------------------------------------------- */
+
+    if (prefersReducedMotion) {
+
         elements.forEach(element => {
-            element.classList.add("visible");
+
+            element.classList.add(
+                "visible"
+            );
+
+            element.classList.add(
+                "scroll-visible"
+            );
+
         });
 
         return;
     }
 
 
-    /* ---------- Initial state ---------- */
+    /* --------------------------------------------------------
+       Initial hidden state
+    -------------------------------------------------------- */
 
     elements.forEach(element => {
 
-        element.classList.add("scroll-hidden");
+        element.classList.add(
+            "scroll-hidden"
+        );
 
     });
 
 
-    /* ---------- Observer ---------- */
+    /* --------------------------------------------------------
+       Intersection Observer
+    -------------------------------------------------------- */
 
     const observer =
         new IntersectionObserver(
@@ -411,9 +644,16 @@ function initScrollReveal() {
                         return;
                     }
 
+
                     entry.target.classList.add(
                         "scroll-visible"
                     );
+
+
+                    entry.target.classList.add(
+                        "visible"
+                    );
+
 
                     observer.unobserve(
                         entry.target
@@ -424,182 +664,25 @@ function initScrollReveal() {
             },
             {
                 threshold: 0.12,
-                rootMargin: "0px 0px -40px 0px"
+
+                rootMargin:
+                    "0px 0px -40px 0px"
             }
         );
 
 
     elements.forEach(element => {
+
         observer.observe(element);
+
     });
 
 }
 
 
 /* ============================================================
-   8. ANIMATED STATISTICS COUNTERS
-   ============================================================ */
-
-function initCounters() {
-
-    const counters =
-        document.querySelectorAll(
-            "[data-count]"
-        );
-
-    if (counters.length === 0) {
-        return;
-    }
-
-
-    const animateCounter = counter => {
-
-        const target =
-            parseFloat(
-                counter.dataset.count
-            );
-
-        if (Number.isNaN(target)) {
-            return;
-        }
-
-        const duration =
-            parseInt(
-                counter.dataset.duration || "1800",
-                10
-            );
-
-        const suffix =
-            counter.dataset.suffix || "";
-
-        const prefix =
-            counter.dataset.prefix || "";
-
-        const decimals =
-            target % 1 !== 0
-                ? 1
-                : 0;
-
-
-        if (prefersReducedMotion) {
-
-            counter.textContent =
-                prefix +
-                target.toFixed(decimals) +
-                suffix;
-
-            return;
-
-        }
-
-
-        const startTime =
-            performance.now();
-
-
-        function updateCounter(currentTime) {
-
-            const elapsed =
-                currentTime - startTime;
-
-            const progress =
-                Math.min(
-                    elapsed / duration,
-                    1
-                );
-
-
-            /* Ease-out effect */
-
-            const easedProgress =
-                1 -
-                Math.pow(
-                    1 - progress,
-                    3
-                );
-
-
-            const currentValue =
-                target * easedProgress;
-
-
-            counter.textContent =
-                prefix +
-                currentValue.toFixed(decimals) +
-                suffix;
-
-
-            if (progress < 1) {
-
-                requestAnimationFrame(
-                    updateCounter
-                );
-
-            } else {
-
-                counter.textContent =
-                    prefix +
-                    target.toFixed(decimals) +
-                    suffix;
-
-            }
-
-        }
-
-
-        requestAnimationFrame(
-            updateCounter
-        );
-
-    };
-
-
-    const observer =
-        new IntersectionObserver(
-            entries => {
-
-                entries.forEach(entry => {
-
-                    if (!entry.isIntersecting) {
-                        return;
-                    }
-
-                    const counter =
-                        entry.target;
-
-                    if (
-                        counter.dataset.animated ===
-                        "true"
-                    ) {
-                        return;
-                    }
-
-                    counter.dataset.animated =
-                        "true";
-
-                    animateCounter(counter);
-
-                    observer.unobserve(counter);
-
-                });
-
-            },
-            {
-                threshold: 0.5
-            }
-        );
-
-
-    counters.forEach(counter => {
-        observer.observe(counter);
-    });
-
-}
-
-
-/* ============================================================
-   9. FAQ ACCORDION
-   ============================================================ */
+   8. FAQ ACCORDION
+============================================================ */
 
 function initFAQ() {
 
@@ -607,6 +690,7 @@ function initFAQ() {
         document.querySelectorAll(
             ".faq-item"
         );
+
 
     if (faqItems.length === 0) {
         return;
@@ -625,31 +709,34 @@ function initFAQ() {
                 ".faq-answer"
             );
 
+
         if (!question || !answer) {
             return;
         }
 
 
-        /* ---------- Accessibility ---------- */
+        /* ----------------------------------------------------
+           Accessibility
+        ---------------------------------------------------- */
 
         question.setAttribute(
-            "role",
-            "button"
-        );
-
-        question.setAttribute(
-            "tabindex",
-            "0"
+            "aria-expanded",
+            "false"
         );
 
 
-        /* ---------- Initial state ---------- */
+        /* ----------------------------------------------------
+           Check initially open FAQ
+        ---------------------------------------------------- */
 
         const initiallyOpen =
             item.classList.contains("active") ||
             item.classList.contains("open");
 
+
         if (initiallyOpen) {
+
+            item.classList.add("active");
 
             answer.style.maxHeight =
                 answer.scrollHeight + "px";
@@ -659,17 +746,12 @@ function initFAQ() {
                 "true"
             );
 
-        } else {
-
-            question.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
         }
 
 
-        /* ---------- Click ---------- */
+        /* ----------------------------------------------------
+           Click
+        ---------------------------------------------------- */
 
         question.addEventListener(
             "click",
@@ -685,7 +767,9 @@ function initFAQ() {
         );
 
 
-        /* ---------- Keyboard ---------- */
+        /* ----------------------------------------------------
+           Keyboard support
+        ---------------------------------------------------- */
 
         question.addEventListener(
             "keydown",
@@ -712,6 +796,10 @@ function initFAQ() {
     });
 
 
+    /* --------------------------------------------------------
+       Toggle FAQ
+    -------------------------------------------------------- */
+
     function toggleFAQ(
         item,
         question,
@@ -719,16 +807,21 @@ function initFAQ() {
     ) {
 
         const isOpen =
-            item.classList.contains("active");
+            item.classList.contains(
+                "active"
+            );
 
 
-        /* ---------- Close all other items ---------- */
+        /* ----------------------------------------------------
+           Close all other FAQs
+        ---------------------------------------------------- */
 
         faqItems.forEach(otherItem => {
 
             if (otherItem === item) {
                 return;
             }
+
 
             const otherQuestion =
                 otherItem.querySelector(
@@ -740,6 +833,7 @@ function initFAQ() {
                     ".faq-answer"
                 );
 
+
             otherItem.classList.remove(
                 "active"
             );
@@ -748,12 +842,14 @@ function initFAQ() {
                 "open"
             );
 
+
             if (otherAnswer) {
 
                 otherAnswer.style.maxHeight =
                     null;
 
             }
+
 
             if (otherQuestion) {
 
@@ -767,7 +863,9 @@ function initFAQ() {
         });
 
 
-        /* ---------- Toggle current item ---------- */
+        /* ----------------------------------------------------
+           Toggle current FAQ
+        ---------------------------------------------------- */
 
         if (isOpen) {
 
@@ -809,18 +907,16 @@ function initFAQ() {
 
 
 /* ============================================================
-   10. SCROLL TO TOP
-   ============================================================ */
+   9. SCROLL TO TOP
+============================================================ */
 
 function initScrollToTop() {
 
     const button =
         document.querySelector(
             ".scroll-top"
-        ) ||
-        document.querySelector(
-            ".scroll-to-top"
         );
+
 
     if (!button) {
         return;
@@ -833,6 +929,7 @@ function initScrollToTop() {
 
             event.preventDefault();
 
+
             if (prefersReducedMotion) {
 
                 window.scrollTo(
@@ -843,8 +940,11 @@ function initScrollToTop() {
             } else {
 
                 window.scrollTo({
+
                     top: 0,
+
                     behavior: "smooth"
+
                 });
 
             }
@@ -856,25 +956,23 @@ function initScrollToTop() {
 
 
 /* ============================================================
-   11. SCROLL-TO-TOP VISIBILITY
-   ============================================================ */
+   10. SCROLL-TO-TOP VISIBILITY
+============================================================ */
 
 function initBackToTopVisibility() {
 
     const button =
         document.querySelector(
             ".scroll-top"
-        ) ||
-        document.querySelector(
-            ".scroll-to-top"
         );
+
 
     if (!button) {
         return;
     }
 
 
-    const updateButton = () => {
+    function updateButton() {
 
         if (window.scrollY > 400) {
 
@@ -898,10 +996,11 @@ function initBackToTopVisibility() {
 
         }
 
-    };
+    }
 
 
     updateButton();
+
 
     window.addEventListener(
         "scroll",
@@ -913,31 +1012,23 @@ function initBackToTopVisibility() {
 
 
 /* ============================================================
-   12. LOADING SCREEN
-   ============================================================ */
+   11. LOADING SCREEN
+============================================================ */
 
 function initLoadingScreen() {
 
     const loader =
         document.querySelector(
-            ".loader"
-        ) ||
-        document.querySelector(
-            ".loading-screen"
-        ) ||
-        document.querySelector(
             "#loader"
-        ) ||
-        document.querySelector(
-            "#loading-screen"
         );
+
 
     if (!loader) {
         return;
     }
 
 
-    const hideLoader = () => {
+    function hideLoader() {
 
         loader.classList.add(
             "loaded"
@@ -947,6 +1038,7 @@ function initLoadingScreen() {
             "hidden"
         );
 
+
         setTimeout(() => {
 
             loader.style.display =
@@ -954,7 +1046,7 @@ function initLoadingScreen() {
 
         }, 700);
 
-    };
+    }
 
 
     if (
@@ -990,457 +1082,48 @@ function initLoadingScreen() {
 
 
 /* ============================================================
-   13. CONTACT FORM
-   ============================================================ */
+   12. CURRENT YEAR
 
-function initContactForm() {
+   Matches:
 
-    const form =
+   <span id="year"></span>
+============================================================ */
+
+function initCurrentYear() {
+
+    const yearElement =
         document.querySelector(
-            "#contact-form"
-        ) ||
-        document.querySelector(
-            ".contact-form"
-        ) ||
-        document.querySelector(
-            'form[data-contact-form]'
+            "#year"
         );
 
-    if (!form) {
+
+    if (!yearElement) {
         return;
     }
 
 
-    form.addEventListener(
-        "submit",
-        event => {
-
-            event.preventDefault();
-
-            clearFormErrors(form);
-
-
-            const formData =
-                new FormData(form);
-
-
-            const name =
-                getFieldValue(
-                    formData,
-                    [
-                        "name",
-                        "fullName"
-                    ]
-                );
-
-            const email =
-                getFieldValue(
-                    formData,
-                    [
-                        "email",
-                        "emailAddress"
-                    ]
-                );
-
-            const phone =
-                getFieldValue(
-                    formData,
-                    [
-                        "phone",
-                        "mobile"
-                    ]
-                );
-
-            const message =
-                getFieldValue(
-                    formData,
-                    [
-                        "message",
-                        "description"
-                    ]
-                );
-
-
-            let isValid = true;
-
-
-            /* ---------- Name ---------- */
-
-            if (
-                name &&
-                name.length < 2
-            ) {
-
-                showFieldError(
-                    form,
-                    [
-                        "name",
-                        "fullName"
-                    ],
-                    "Please enter your name."
-                );
-
-                isValid = false;
-
-            }
-
-
-            /* ---------- Email ---------- */
-
-            if (
-                email &&
-                !isValidEmail(email)
-            ) {
-
-                showFieldError(
-                    form,
-                    [
-                        "email",
-                        "emailAddress"
-                    ],
-                    "Please enter a valid email address."
-                );
-
-                isValid = false;
-
-            }
-
-
-            /* ---------- Phone ---------- */
-
-            if (phone) {
-
-                const cleanPhone =
-                    phone.replace(
-                        /[\s()+-]/g,
-                        ""
-                    );
-
-                if (
-                    cleanPhone.length < 7 ||
-                    !/^\d+$/.test(
-                        cleanPhone
-                    )
-                ) {
-
-                    showFieldError(
-                        form,
-                        [
-                            "phone",
-                            "mobile"
-                        ],
-                        "Please enter a valid phone number."
-                    );
-
-                    isValid = false;
-
-                }
-
-            }
-
-
-            /* ---------- Message ---------- */
-
-            if (
-                message &&
-                message.length < 10
-            ) {
-
-                showFieldError(
-                    form,
-                    [
-                        "message",
-                        "description"
-                    ],
-                    "Please provide a little more information."
-                );
-
-                isValid = false;
-
-            }
-
-
-            if (!isValid) {
-
-                showFormMessage(
-                    form,
-                    "Please correct the highlighted fields.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            /*
-             * This is a static website.
-             *
-             * No backend is included here.
-             * The form therefore displays a success message
-             * instead of pretending that the message was sent.
-             *
-             * Replace this section later with:
-             * - Formspree
-             * - Web3Forms
-             * - EmailJS
-             * - Your own backend/API
-             */
-
-            showFormMessage(
-                form,
-                "Thank you! Your enquiry has been received. We will contact you shortly.",
-                "success"
-            );
-
-
-            form.classList.add(
-                "submitted"
-            );
-
-
-            /*
-             * Reset the form after a short delay.
-             */
-
-            setTimeout(() => {
-
-                form.reset();
-
-                form.classList.remove(
-                    "submitted"
-                );
-
-            }, 1500);
-
-        }
-    );
+    yearElement.textContent =
+        new Date().getFullYear();
 
 }
 
 
 /* ============================================================
-   14. FORM VALIDATION HELPERS
-   ============================================================ */
-
-function getFieldValue(
-    formData,
-    possibleNames
-) {
-
-    for (
-        const name of possibleNames
-    ) {
-
-        const value =
-            formData.get(name);
-
-        if (
-            value !== null &&
-            String(value).trim() !== ""
-        ) {
-
-            return String(
-                value
-            ).trim();
-
-        }
-
-    }
-
-    return "";
-
-}
-
-
-function isValidEmail(email) {
-
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        .test(email);
-
-}
-
-
-function showFieldError(
-    form,
-    fieldNames,
-    message
-) {
-
-    let field = null;
-
-    for (
-        const fieldName of fieldNames
-    ) {
-
-        field =
-            form.querySelector(
-                `[name="${fieldName}"]`
-            );
-
-        if (field) {
-            break;
-        }
-
-    }
-
-    if (!field) {
-        return;
-    }
-
-
-    field.classList.add(
-        "error"
-    );
-
-    field.setAttribute(
-        "aria-invalid",
-        "true"
-    );
-
-
-    let errorElement =
-        field.parentElement.querySelector(
-            ".field-error"
-        );
-
-
-    if (!errorElement) {
-
-        errorElement =
-            document.createElement(
-                "small"
-            );
-
-        errorElement.className =
-            "field-error";
-
-        field.parentElement.appendChild(
-            errorElement
-        );
-
-    }
-
-
-    errorElement.textContent =
-        message;
-
-}
-
-
-function clearFormErrors(form) {
-
-    const fields =
-        form.querySelectorAll(
-            ".error"
-        );
-
-    fields.forEach(field => {
-
-        field.classList.remove(
-            "error"
-        );
-
-        field.removeAttribute(
-            "aria-invalid"
-        );
-
-    });
-
-
-    const errors =
-        form.querySelectorAll(
-            ".field-error"
-        );
-
-    errors.forEach(error => {
-
-        error.remove();
-
-    });
-
-
-    const messages =
-        form.querySelectorAll(
-            ".form-message"
-        );
-
-    messages.forEach(message => {
-
-        message.remove();
-
-    });
-
-}
-
-
-function showFormMessage(
-    form,
-    message,
-    type
-) {
-
-    let messageElement =
-        form.querySelector(
-            ".form-message"
-        );
-
-
-    if (!messageElement) {
-
-        messageElement =
-            document.createElement(
-                "div"
-            );
-
-        messageElement.className =
-            "form-message";
-
-        form.prepend(
-            messageElement
-        );
-
-    }
-
-
-    messageElement.textContent =
-        message;
-
-    messageElement.classList.remove(
-        "success",
-        "error"
-    );
-
-    messageElement.classList.add(
-        type
-    );
-
-}
-
-
-/* ============================================================
-   15. FLOATING CALL BUTTON
-   ============================================================ */
+   13. FLOATING CALL BUTTON
+============================================================ */
 
 function initCallButton() {
 
     const callButton =
         document.querySelector(
-            ".floating-call"
-        ) ||
-        document.querySelector(
-            ".call-button"
+            ".floating-contact"
         );
+
 
     if (!callButton) {
         return;
     }
 
-
-    /*
-     * If the button already has a phone href,
-     * don't modify it.
-     */
 
     const href =
         callButton.getAttribute(
@@ -1448,22 +1131,20 @@ function initCallButton() {
         );
 
 
+    /* --------------------------------------------------------
+       If HTML already contains tel:
+       don't change it.
+    -------------------------------------------------------- */
+
     if (
         href &&
         href.startsWith("tel:")
     ) {
+
         return;
+
     }
 
-
-    /*
-     * Phone number can be configured in HTML:
-     *
-     * <a
-     *   class="floating-call"
-     *   data-phone="+919876543210">
-     * </a>
-     */
 
     const phone =
         callButton.dataset.phone;
@@ -1482,265 +1163,20 @@ function initCallButton() {
 
 
 /* ============================================================
-   16. CURRENT YEAR
-   ============================================================ */
+   14. PHONE NUMBERS CONFIGURATION
 
-function initCurrentYear() {
+   Add or remove numbers here.
 
-    const yearElements =
-        document.querySelectorAll(
-            "#current-year, " +
-            ".current-year, " +
-            "[data-current-year]"
-        );
-
-    if (
-        yearElements.length === 0
-    ) {
-        return;
-    }
-
-
-    const currentYear =
-        new Date().getFullYear();
-
-
-    yearElements.forEach(element => {
-
-        element.textContent =
-            currentYear;
-
-    });
-
-}
-
-
-/* ============================================================
-   17. BACK TO TOP KEYBOARD SUPPORT
-   ============================================================ */
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        /*
-         * Home key + Ctrl
-         * scrolls to top.
-         */
-
-        if (
-            event.key === "Home" &&
-            event.ctrlKey
-        ) {
-
-            event.preventDefault();
-
-            window.scrollTo({
-                top: 0,
-                behavior:
-                    prefersReducedMotion
-                        ? "auto"
-                        : "smooth"
-            });
-
-        }
-
-    }
-);
-
-
-/* ============================================================
-   18. HANDLE RESIZE
-   ============================================================ */
-
-let resizeTimer;
-
-window.addEventListener(
-    "resize",
-    () => {
-
-        clearTimeout(
-            resizeTimer
-        );
-
-        resizeTimer =
-            setTimeout(() => {
-
-                /*
-                 * Recalculate open FAQ height
-                 * after screen rotation/resizing.
-                 */
-
-                const openFAQs =
-                    document.querySelectorAll(
-                        ".faq-item.active .faq-answer"
-                    );
-
-                openFAQs.forEach(answer => {
-
-                    answer.style.maxHeight =
-                        answer.scrollHeight +
-                        "px";
-
-                });
-
-            }, 150);
-
-    }
-);
-
-
-/* ============================================================
-   19. IMAGE LOAD FALLBACK
-   ============================================================ */
-
-document.addEventListener(
-    "error",
-    event => {
-
-        const element =
-            event.target;
-
-        if (
-            element.tagName !==
-            "IMG"
-        ) {
-            return;
-        }
-
-
-        /*
-         * Add a class so CSS can provide
-         * a graceful fallback.
-         */
-
-        element.classList.add(
-            "image-error"
-        );
-
-    },
-    true
-);
-
-
-/* ============================================================
-   20. EXTERNAL LINKS
-   ============================================================ */
-
-function initExternalLinks() {
-
-    const links =
-        document.querySelectorAll(
-            'a[href^="http"]'
-        );
-
-    links.forEach(link => {
-
-        if (
-            link.hostname !==
-            window.location.hostname
-        ) {
-
-            link.setAttribute(
-                "target",
-                "_blank"
-            );
-
-            link.setAttribute(
-                "rel",
-                "noopener noreferrer"
-            );
-
-        }
-
-    });
-
-}
-
-initExternalLinks();
-
-
-/* ============================================================
-   21. INITIALIZE ACTIVE NAVIGATION
-   ============================================================ */
-
-initActiveNavigation();
-
-
-/* ============================================================
-   22. PAGE VISIBILITY
-   ============================================================ */
-
-document.addEventListener(
-    "visibilitychange",
-    () => {
-
-        /*
-         * Pause expensive animation work when
-         * the browser tab is hidden.
-         *
-         * This is mainly useful for future
-         * animation additions.
-         */
-
-        if (
-            document.hidden
-        ) {
-
-            document.documentElement
-                .classList.add(
-                    "page-hidden"
-                );
-
-        } else {
-
-            document.documentElement
-                .classList.remove(
-                    "page-hidden"
-                );
-
-        }
-
-    }
-);
-
-
-/* ============================================================
-   23. CONSOLE INFORMATION
-   ============================================================ */
-
-if (
-    window.location.hostname ===
-    "localhost" ||
-    window.location.hostname ===
-    "127.0.0.1"
-) {
-
-    console.log(
-        "Advertising Agency Website loaded successfully."
-    );
-
-}
-
-
-
-
-
-/* ============================================================
-   24. PHONE NUMBERS CONFIGURATION
-
-   Add as many numbers as required here.
-
-   label   = Optional description
-   number  = Display number
-   tel     = Number used by the phone dialer
+   label  = Description
+   number = Display number
+   tel    = Actual dialing number
 ============================================================ */
 
 const PHONE_NUMBERS = [
 
     {
         label: "Primary Contact",
-        number: "+91 98300 86004 ",
+        number: "+91 98300 86004",
         tel: "+919830086004"
     },
 
@@ -1772,7 +1208,7 @@ const PHONE_NUMBERS = [
 
 
 /* ============================================================
-   DYNAMIC CALL NUMBER DROPDOWN
+   15. DYNAMIC CALL NUMBER DROPDOWN
 ============================================================ */
 
 function initCallDropdown() {
@@ -1809,22 +1245,20 @@ function initCallDropdown() {
 
 
     /* ========================================================
-       GENERATE PHONE NUMBERS
+       RENDER PHONE NUMBERS
     ======================================================== */
 
     function renderPhoneNumbers() {
-
-        /* Clear existing numbers */
 
         list.innerHTML = "";
 
 
         PHONE_NUMBERS.forEach(phone => {
 
-            /* Create phone link */
-
             const phoneLink =
-                document.createElement("a");
+                document.createElement(
+                    "a"
+                );
 
 
             phoneLink.href =
@@ -1835,52 +1269,77 @@ function initCallDropdown() {
                 "call-number-item";
 
 
-            /* Phone Icon */
+            /* ------------------------------------------------
+               Icon
+            ------------------------------------------------ */
 
             const icon =
-                document.createElement("span");
+                document.createElement(
+                    "span"
+                );
+
 
             icon.className =
                 "call-number-icon";
+
 
             icon.textContent =
                 "☎";
 
 
-            /* Text Container */
+            /* ------------------------------------------------
+               Text container
+            ------------------------------------------------ */
 
             const textContainer =
-                document.createElement("span");
+                document.createElement(
+                    "span"
+                );
+
 
             textContainer.className =
                 "call-number-text";
 
 
-            /* Label */
+            /* ------------------------------------------------
+               Label
+            ------------------------------------------------ */
 
             const label =
-                document.createElement("span");
+                document.createElement(
+                    "span"
+                );
+
 
             label.className =
                 "call-number-label";
+
 
             label.textContent =
                 phone.label;
 
 
-            /* Number */
+            /* ------------------------------------------------
+               Number
+            ------------------------------------------------ */
 
             const number =
-                document.createElement("span");
+                document.createElement(
+                    "span"
+                );
+
 
             number.className =
                 "call-number-value";
+
 
             number.textContent =
                 phone.number;
 
 
-            /* Assemble */
+            /* ------------------------------------------------
+               Assemble
+            ------------------------------------------------ */
 
             textContainer.appendChild(
                 label
@@ -1919,10 +1378,12 @@ function initCallDropdown() {
             "active"
         );
 
+
         button.setAttribute(
             "aria-expanded",
             "true"
         );
+
 
         dropdown.setAttribute(
             "aria-hidden",
@@ -1942,10 +1403,12 @@ function initCallDropdown() {
             "active"
         );
 
+
         button.setAttribute(
             "aria-expanded",
             "false"
         );
+
 
         dropdown.setAttribute(
             "aria-hidden",
@@ -1956,7 +1419,7 @@ function initCallDropdown() {
 
 
     /* ========================================================
-       TOGGLE DROPDOWN
+       BUTTON CLICK
     ======================================================== */
 
     button.addEventListener(
@@ -1988,9 +1451,6 @@ function initCallDropdown() {
 
     /* ========================================================
        CLICK OUTSIDE
-
-       Clicking anywhere outside the dropdown
-       automatically closes it.
     ======================================================== */
 
     document.addEventListener(
@@ -2040,9 +1500,199 @@ function initCallDropdown() {
 }
 
 
+/* ============================================================
+   16. KEYBOARD SUPPORT
+
+   Ctrl + Home = Scroll to top
+============================================================ */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Home" &&
+            event.ctrlKey
+        ) {
+
+            event.preventDefault();
+
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior:
+                    prefersReducedMotion
+                        ? "auto"
+                        : "smooth"
+
+            });
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   17. HANDLE WINDOW RESIZE
+
+   Recalculate open FAQ height.
+============================================================ */
+
+let resizeTimer;
+
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        clearTimeout(
+            resizeTimer
+        );
+
+
+        resizeTimer =
+            setTimeout(() => {
+
+                const openFAQs =
+                    document.querySelectorAll(
+                        ".faq-item.active .faq-answer"
+                    );
+
+
+                openFAQs.forEach(
+                    answer => {
+
+                        answer.style.maxHeight =
+                            answer.scrollHeight +
+                            "px";
+
+                    }
+                );
+
+            }, 150);
+
+    }
+);
+
+
+/* ============================================================
+   18. IMAGE LOAD FALLBACK
+============================================================ */
+
+document.addEventListener(
+    "error",
+    event => {
+
+        const element =
+            event.target;
+
+
+        if (
+            element.tagName !==
+            "IMG"
+        ) {
+
+            return;
+
+        }
+
+
+        element.classList.add(
+            "image-error"
+        );
+
+    },
+    true
+);
+
+
+/* ============================================================
+   19. EXTERNAL LINKS
+============================================================ */
+
+function initExternalLinks() {
+
+    const links =
+        document.querySelectorAll(
+            'a[href^="http"]'
+        );
+
+
+    links.forEach(link => {
+
+        if (
+            link.hostname !==
+            window.location.hostname
+        ) {
+
+            link.setAttribute(
+                "target",
+                "_blank"
+            );
+
+
+            link.setAttribute(
+                "rel",
+                "noopener noreferrer"
+            );
+
+        }
+
+    });
+
+}
+
+
+/* ============================================================
+   20. PAGE VISIBILITY
+============================================================ */
+
+document.addEventListener(
+    "visibilitychange",
+    () => {
+
+        if (
+            document.hidden
+        ) {
+
+            document.documentElement.classList.add(
+                "page-hidden"
+            );
+
+        } else {
+
+            document.documentElement.classList.remove(
+                "page-hidden"
+            );
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   21. CONSOLE INFORMATION
+============================================================ */
+
+if (
+    window.location.hostname ===
+    "localhost" ||
+
+    window.location.hostname ===
+    "127.0.0.1"
+) {
+
+    console.log(
+        "Internet Communication website loaded successfully."
+    );
+
+}
 
 
 /* ============================================================
    END OF MAIN.JS
-   ============================================================ */
-
+============================================================ */

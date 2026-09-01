@@ -371,33 +371,169 @@ select {
 }
 
 
-/* =====================================================
-   MOBILE NAVIGATION BUTTON
-===================================================== */
+/* ============================================================
+   MOBILE NAVIGATION
+============================================================ */
 
-.nav-toggle {
-    display: none;
+@media (max-width: 767px) {
 
-    background: none;
+    .navbar {
+        position: relative;
+        z-index: 1000;
+    }
 
-    border: 0;
+    /* Burger button */
+    .nav-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
 
-    padding: 8px;
+        position: relative;
+        z-index: 1100;
 
-    cursor: pointer;
-}
+        width: 42px;
+        height: 42px;
+
+        border: none;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    .nav-toggle span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        border-radius: 2px;
+        background: currentColor;
+
+        transition:
+            transform 0.3s ease,
+            opacity 0.3s ease;
+    }
 
 
-.nav-toggle span {
-    display: block;
+    /* ========================================================
+       MOBILE MENU
+    ======================================================== */
 
-    width: 25px;
+    .nav-menu {
+        position: absolute;
 
-    height: 2px;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
 
-    background: var(--primary);
+        width: 100%;
 
-    margin: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        padding: 14px;
+
+        background: #ffffff;
+
+        border-radius: 12px;
+
+        box-shadow:
+            0 15px 35px rgba(0, 0, 0, 0.15);
+
+        border: 1px solid rgba(0, 0, 0, 0.08);
+
+        z-index: 1050;
+
+        /* Hidden initially */
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transform: translateY(-10px);
+
+        transition:
+            opacity 0.25s ease,
+            visibility 0.25s ease,
+            transform 0.25s ease;
+    }
+
+
+    /* ========================================================
+       OPEN MENU
+    ======================================================== */
+
+    .nav-menu.active,
+    .nav-menu.open,
+    .nav-menu.show {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+
+        transform: translateY(0);
+    }
+
+
+    /* ========================================================
+       MENU LINKS
+    ======================================================== */
+
+    .nav-menu > a {
+        display: flex;
+        align-items: center;
+
+        width: 100%;
+
+        padding: 13px 14px;
+
+        text-decoration: none;
+
+        border-radius: 8px;
+
+        background: transparent;
+    }
+
+    .nav-menu > a:hover {
+        background: rgba(18, 53, 91, 0.07);
+    }
+
+
+    /* ========================================================
+       MOBILE CTA BUTTONS
+    ======================================================== */
+
+    .nav-menu .nav-cta {
+        width: 100%;
+
+        justify-content: center;
+
+        margin-top: 6px;
+    }
+
+
+    /* ========================================================
+       BURGER → X ANIMATION
+    ======================================================== */
+
+    .nav-toggle.active span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-toggle.active span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+
+    /* ========================================================
+       PREVENT PAGE SHIFT
+    ======================================================== */
+
+    body.menu-open {
+        overflow-x: hidden;
+    }
 }
 
 
