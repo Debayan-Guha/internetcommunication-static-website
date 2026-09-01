@@ -1,20 +1,17 @@
 /* =========================================================
    RESPONSIVE.CSS
-   Advertising Agency Website
+   Internet Communication
    ---------------------------------------------------------
-   Responsive styles for:
-   - Navigation
-   - Hero / Newspaper
-   - Statistics
-   - Services
-   - Clients
-   - Process
-   - Why Choose Us
-   - CTA
-   - FAQ
-   - Contact
-   - Footer
-   - Floating Buttons
+   IMPORTANT:
+   This file is written specifically for the current
+   index.html structure.
+
+   Main breakpoints:
+   - Large tablet / small desktop : 1200px
+   - Tablet                       : 1024px
+   - Mobile                      : 767px
+   - Small mobile                : 480px
+   - Very small                  : 360px
    ========================================================= */
 
 
@@ -24,10 +21,18 @@
 
 html {
     overflow-x: hidden;
+    max-width: 100%;
 }
 
 body {
     overflow-x: hidden;
+    max-width: 100%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
 img,
@@ -38,363 +43,290 @@ svg {
 }
 
 .container {
-    width: min(100% - 40px, 1200px);
-    margin-inline: auto;
+    width: min(1200px, calc(100% - 40px));
+    margin-left: auto;
+    margin-right: auto;
 }
 
 section {
+    width: 100%;
+    max-width: 100%;
     overflow: hidden;
 }
 
 
 /* =========================================================
-   2. LARGE TABLETS / SMALL DESKTOP
+   2. LARGE TABLET / SMALL DESKTOP
    1025px - 1200px
    ========================================================= */
 
 @media (max-width: 1200px) {
 
     .container {
-        width: min(100% - 50px, 1100px);
+        width: min(1100px, calc(100% - 40px));
     }
 
-    /* Navigation */
 
-    .nav-container,
-    .navbar-container,
-    .header-container {
-        padding-inline: 25px;
+    /* -----------------------------------------------------
+       NAVIGATION
+       ----------------------------------------------------- */
+
+    .navbar {
+        width: min(1100px, calc(100% - 40px));
     }
 
-    .nav-links {
-        gap: 24px;
+    .nav-menu {
+        gap: 20px;
     }
 
-    .nav-links a {
+    .nav-menu > a {
         font-size: 0.92rem;
     }
 
 
-    /* Hero */
+    /* -----------------------------------------------------
+       HERO
+       ----------------------------------------------------- */
 
-    .hero {
-        padding: 110px 0 80px;
-    }
-
-    .hero-content {
+    .hero-grid {
         gap: 45px;
     }
 
-    .hero-title {
+    .hero h1 {
         font-size: clamp(3rem, 5vw, 4.5rem);
     }
 
-    .hero-subtitle {
+    .hero-text {
         max-width: 550px;
     }
 
-
-    /* Newspaper */
-
-    .newspaper {
-        transform: rotate(1deg);
-    }
-
-    .newspaper-container {
+    .hero-visual {
         max-width: 560px;
     }
 
 
-    /* Statistics */
+    /* -----------------------------------------------------
+       ABOUT
+       ----------------------------------------------------- */
 
-    .stats-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 18px;
-    }
-
-    .stat-card {
-        padding: 25px 18px;
+    .about-grid {
+        gap: 45px;
     }
 
 
-    /* Services */
+    /* -----------------------------------------------------
+       SERVICES
+       ----------------------------------------------------- */
 
     .services-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 22px;
+        gap: 20px;
     }
 
 
-    /* Clients */
+    /* -----------------------------------------------------
+       FOOTER
+       ----------------------------------------------------- */
 
-    .clients-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-
-
-    /* Process */
-
-    .process-grid {
-        gap: 25px;
-    }
-
-
-    /* Contact */
-
-    .contact-wrapper {
-        gap: 45px;
+    .footer-grid {
+        gap: 30px;
     }
 
 }
 
 
 /* =========================================================
-   3. TABLETS
+   3. TABLET
    768px - 1024px
    ========================================================= */
 
 @media (max-width: 1024px) {
 
     .container {
-        width: min(100% - 40px, 900px);
+        width: calc(100% - 40px);
     }
 
 
-    /* -----------------------------------------------------
-       Navigation
-       ----------------------------------------------------- */
+    /* =====================================================
+       NAVIGATION
+       ===================================================== */
 
     .navbar {
+        width: calc(100% - 40px);
         min-height: 70px;
     }
 
-    .nav-container,
-    .navbar-container,
-    .header-container {
-        padding-inline: 20px;
+    /*
+       Keep desktop navigation until mobile.
+       This prevents the layout from suddenly changing
+       at tablet widths.
+    */
+
+    .nav-menu {
+        gap: 14px;
     }
 
-    .nav-links {
-        gap: 18px;
+    .nav-menu > a {
+        font-size: 0.85rem;
     }
 
-    .nav-links a {
-        font-size: 0.86rem;
-    }
-
-    .nav-logo {
-        max-width: 150px;
-    }
-
-    .nav-cta {
-        padding: 10px 16px;
+    .nav-menu .nav-cta {
+        padding: 10px 14px;
     }
 
 
-    /* -----------------------------------------------------
-       Hero
-       ----------------------------------------------------- */
+    /* =====================================================
+       HERO
+       ===================================================== */
 
     .hero {
         min-height: auto;
-        padding: 100px 0 70px;
+        padding-top: 90px;
+        padding-bottom: 70px;
     }
 
-    .hero-content {
+    .hero-grid {
         grid-template-columns: 1fr;
-        text-align: center;
         gap: 55px;
     }
 
-    .hero-text {
-        display: flex;
-        flex-direction: column;
+    .hero-content {
+        text-align: center;
         align-items: center;
     }
 
-    .hero-title {
+    .hero h1 {
         max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
         font-size: clamp(3rem, 7vw, 4.5rem);
     }
 
-    .hero-description {
-        max-width: 680px;
+    .hero-text {
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    .hero-buttons {
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .hero-trust {
         justify-content: center;
     }
 
     .hero-visual {
         width: min(100%, 650px);
-        margin-inline: auto;
+        margin-left: auto;
+        margin-right: auto;
     }
 
 
-    /* -----------------------------------------------------
-       Newspaper
-       ----------------------------------------------------- */
+    /* =====================================================
+       ABOUT
+       ===================================================== */
 
-    .newspaper {
-        transform: rotate(0.5deg);
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
     }
 
-    .newspaper-page {
-        padding: 30px;
+    .about-copy {
+        max-width: 750px;
     }
-
-    .newspaper-headline {
-        font-size: clamp(2rem, 5vw, 3.5rem);
-    }
-
-    .newspaper-subheadline {
-        font-size: 1rem;
-    }
-
-    .newspaper-columns {
-        gap: 20px;
-    }
-
-
-    /* -----------------------------------------------------
-       Statistics
-       ----------------------------------------------------- */
 
     .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-
-    .stat-number {
-        font-size: 2.5rem;
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 800px;
     }
 
 
-    /* -----------------------------------------------------
-       Section Headers
-       ----------------------------------------------------- */
-
-    .section-title {
-        font-size: clamp(2.2rem, 5vw, 3.2rem);
-    }
-
-    .section-description {
-        max-width: 650px;
-    }
-
-
-    /* -----------------------------------------------------
-       Services
-       ----------------------------------------------------- */
+    /* =====================================================
+       SERVICES
+       ===================================================== */
 
     .services-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 22px;
-    }
-
-    .service-card {
-        padding: 30px 25px;
+        gap: 20px;
     }
 
 
-    /* -----------------------------------------------------
-       Clients
-       ----------------------------------------------------- */
+    /* =====================================================
+       CLIENTS
+       ===================================================== */
 
-    .clients-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-    }
-
-
-    /* -----------------------------------------------------
-       Process
-       ----------------------------------------------------- */
-
-    .process-grid {
+    .client-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 35px 25px;
-    }
-
-    .process-item::after {
-        display: none;
-    }
-
-    .process-number {
-        width: 60px;
-        height: 60px;
+        gap: 20px;
     }
 
 
-    /* -----------------------------------------------------
-       Why Choose Us
-       ----------------------------------------------------- */
+    /* =====================================================
+       TIMELINE / PROCESS
+       ===================================================== */
+
+    .timeline {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px 25px;
+    }
+
+
+    /* =====================================================
+       WHY US
+       ===================================================== */
 
     .why-grid {
         grid-template-columns: 1fr;
         gap: 40px;
     }
 
-    .why-content {
+    .why-copy {
         max-width: 750px;
     }
 
-    .why-features {
+    .check-list {
         grid-template-columns: repeat(2, 1fr);
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        CTA
-       ----------------------------------------------------- */
+       ===================================================== */
 
     .cta-content {
-        padding: 55px 40px;
-    }
-
-    .cta-title {
-        font-size: clamp(2.2rem, 5vw, 3.3rem);
+        gap: 35px;
+        padding: 50px 40px;
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        FAQ
-       ----------------------------------------------------- */
+       ===================================================== */
 
-    .faq-container {
-        max-width: 850px;
-    }
-
-
-    /* -----------------------------------------------------
-       Contact
-       ----------------------------------------------------- */
-
-    .contact-wrapper {
+    .faq-layout {
         grid-template-columns: 1fr;
-        gap: 45px;
-    }
-
-    .contact-info {
-        max-width: 700px;
-    }
-
-    .contact-form {
-        width: 100%;
+        gap: 40px;
     }
 
 
-    /* -----------------------------------------------------
-       Footer
-       ----------------------------------------------------- */
+    /* =====================================================
+       CONTACT
+       ===================================================== */
+
+    .contact-single {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    /* =====================================================
+       FOOTER
+       ===================================================== */
 
     .footer-grid {
         grid-template-columns: 2fr 1fr 1fr;
-        gap: 35px;
-    }
-
-    .footer-contact {
-        grid-column: 1 / -1;
+        gap: 30px;
     }
 
 }
@@ -402,348 +334,607 @@ section {
 
 /* =========================================================
    4. MOBILE
-   481px - 767px
+   Up to 767px
    ========================================================= */
 
 @media (max-width: 767px) {
 
+    /* =====================================================
+       GLOBAL
+       ===================================================== */
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
     .container {
         width: calc(100% - 32px);
+        max-width: 100%;
+    }
+
+    section {
+        width: 100%;
+        max-width: 100%;
     }
 
 
-    /* -----------------------------------------------------
-       Navigation
-       ----------------------------------------------------- */
+    /* =====================================================
+       NAVIGATION
+       ===================================================== */
+
+    .header {
+        width: 100%;
+    }
 
     .navbar {
-        min-height: 65px;
-    }
-
-    .nav-container,
-    .navbar-container,
-    .header-container {
-        padding-inline: 16px;
-    }
-
-    .nav-logo {
-        max-width: 135px;
+        width: calc(100% - 32px);
+        min-height: 64px;
     }
 
     /*
-       If the HTML contains a mobile menu button,
-       these rules make it visible.
+       IMPORTANT:
+       The actual HTML uses .nav-toggle and .nav-menu.
     */
 
-    .menu-toggle,
-    .mobile-menu-toggle,
-    .hamburger {
+    .nav-toggle {
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        cursor: pointer;
+
+        width: 44px;
+        height: 44px;
+
+        padding: 0;
+        flex-shrink: 0;
     }
 
-    .nav-links {
+    .nav-toggle span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        margin: 3px 0;
+    }
+
+
+    /*
+       Mobile menu.
+       JavaScript should add/remove the appropriate
+       active/open class.
+
+       We support several common class names so the
+       menu works with existing JS.
+    */
+
+    .nav-menu {
         position: absolute;
+
         top: 100%;
         left: 0;
         right: 0;
 
-        display: none;
-        flex-direction: column;
-
         width: 100%;
-        padding: 20px;
 
-        background: var(--color-background, #ffffff);
-        border-top: 1px solid rgba(0, 0, 0, 0.08);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        display: none;
+
+        flex-direction: column;
+        align-items: stretch;
 
         gap: 0;
+
+        padding: 15px 16px 20px;
+
+        z-index: 9999;
     }
 
-    .nav-links.active,
-    .nav-links.open,
-    .nav-links.show {
+    .nav-menu.active,
+    .nav-menu.open,
+    .nav-menu.show {
         display: flex;
     }
 
-    .nav-links li {
+    .nav-menu > a {
         width: 100%;
+        min-height: 46px;
+
+        display: flex;
+        align-items: center;
+
+        padding: 11px 10px;
+
+        font-size: 0.98rem;
     }
 
-    .nav-links a {
-        display: block;
+    /*
+       Hide both desktop CTA buttons inside the mobile
+       navigation only if there are too many items.
+       Contact / Call remain accessible through the
+       mobile menu.
+    */
+
+    .nav-menu .nav-cta {
         width: 100%;
-        padding: 13px 10px;
-        font-size: 1rem;
-    }
-
-    .nav-cta {
-        display: none;
+        justify-content: center;
+        margin-top: 6px;
     }
 
 
-    /* -----------------------------------------------------
-       Hero
-       ----------------------------------------------------- */
+    /* =====================================================
+       HERO
+       ===================================================== */
 
     .hero {
-        padding: 85px 0 55px;
+        min-height: auto;
+
+        padding-top: 75px;
+        padding-bottom: 55px;
     }
 
-    .hero-content {
+    .hero-grid {
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: 1fr;
+
         gap: 40px;
     }
 
-    .hero-title {
-        font-size: clamp(2.5rem, 12vw, 4rem);
-        line-height: 1.05;
+    .hero-content {
+        width: 100%;
+        max-width: 100%;
+
+        text-align: center;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
-    .hero-description {
-        font-size: 1rem;
+    .hero h1 {
+        width: 100%;
+        max-width: 100%;
+
+        font-size: clamp(2.35rem, 11vw, 3.7rem);
+
+        line-height: 1.05;
+
+        overflow-wrap: break-word;
+        word-break: normal;
+    }
+
+    .hero-text {
+        width: 100%;
+        max-width: 100%;
+
+        font-size: 0.98rem;
         line-height: 1.7;
     }
 
-    .hero-buttons {
+    .hero-actions {
         width: 100%;
+
+        display: flex;
         flex-direction: column;
         align-items: stretch;
+
+        gap: 12px;
     }
 
-    .hero-buttons .btn {
+    .hero-actions .btn {
         width: 100%;
+        min-height: 48px;
+
         justify-content: center;
     }
 
+    .hero-trust {
+        width: 100%;
 
-    /* -----------------------------------------------------
-       Newspaper
-       ----------------------------------------------------- */
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 10px;
+    }
+
+    .hero-trust > div {
+        min-width: 0;
+    }
+
+    .hero-trust strong,
+    .hero-trust span {
+        display: block;
+    }
+
+
+    /* =====================================================
+       HERO VISUAL / NEWSPAPER
+       ===================================================== */
 
     .hero-visual {
         width: 100%;
+        max-width: 100%;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        min-width: 0;
     }
 
-    .newspaper-container {
+    .newspaper-card {
+        max-width: 100%;
+    }
+
+    .card-main {
         width: 100%;
     }
 
-    .newspaper {
-        width: 100%;
-        transform: none;
+    .card-back {
+        max-width: 90%;
     }
 
-    .newspaper-page {
-        padding: 22px;
-    }
-
-    .newspaper-masthead {
-        font-size: 0.7rem;
-    }
-
-    .newspaper-title {
-        font-size: 1.7rem;
-    }
-
-    .newspaper-headline {
-        font-size: clamp(1.7rem, 8vw, 2.5rem);
-        line-height: 1.05;
-    }
-
-    .newspaper-subheadline {
-        font-size: 0.85rem;
-        line-height: 1.5;
-    }
-
-    .newspaper-columns {
+    .paper-grid {
         grid-template-columns: 1fr;
         gap: 15px;
     }
 
-    .newspaper-column:nth-child(n + 2) {
-        display: none;
+    .paper-image {
+        width: 100%;
     }
 
-    .newspaper-image {
-        min-height: 170px;
+    /*
+       Prevent floating badges from pushing outside
+       the mobile screen.
+    */
+
+    .floating-badge {
+        max-width: 150px;
+
+        white-space: nowrap;
+
+        font-size: 0.72rem;
+    }
+
+    .badge-one {
+        left: 0;
+    }
+
+    .badge-two {
+        right: 0;
     }
 
 
-    /* -----------------------------------------------------
-       General Sections
-       ----------------------------------------------------- */
+    /* =====================================================
+       GENERAL SECTIONS
+       ===================================================== */
 
-    section {
+    .section {
         padding-top: 65px;
         padding-bottom: 65px;
     }
 
-    .section-header {
-        margin-bottom: 35px;
+    .section-heading {
+        width: 100%;
+        max-width: 100%;
     }
 
-    .section-title {
+    .section-heading h2 {
         font-size: clamp(2rem, 9vw, 2.8rem);
         line-height: 1.1;
+
+        overflow-wrap: break-word;
     }
 
-    .section-description {
-        font-size: 0.95rem;
-        line-height: 1.7;
+    .section-heading > p {
+        max-width: 100%;
     }
 
 
-    /* -----------------------------------------------------
-       Statistics
-       ----------------------------------------------------- */
+    /* =====================================================
+       ABOUT
+       ===================================================== */
+
+    .about-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+    }
+
+    .about-copy {
+        width: 100%;
+        max-width: 100%;
+    }
 
     .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 10px;
     }
 
     .stat-card {
-        padding: 22px 12px;
+        min-width: 0;
+        padding: 20px 10px;
     }
 
-    .stat-number {
-        font-size: 2rem;
+    .stat-number,
+    .counter {
+        font-size: 1.9rem;
     }
 
-    .stat-label {
-        font-size: 0.78rem;
+    .stat-card span {
+        font-size: 0.75rem;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
 
 
-    /* -----------------------------------------------------
-       Services
-       ----------------------------------------------------- */
+    /* =====================================================
+       SERVICES
+       ===================================================== */
 
     .services-grid {
+        width: 100%;
+
+        display: grid;
         grid-template-columns: 1fr;
+
         gap: 16px;
     }
 
     .service-card {
-        padding: 27px 22px;
+        width: 100%;
+        min-width: 0;
+
+        padding: 25px 20px;
     }
 
-    .service-icon {
-        width: 52px;
-        height: 52px;
-    }
-
-    .service-title {
+    .service-card h3 {
         font-size: 1.2rem;
     }
 
-    .service-description {
+    .service-card p {
         font-size: 0.9rem;
+        line-height: 1.65;
     }
 
 
-    /* -----------------------------------------------------
-       Clients
-       ----------------------------------------------------- */
+    /* =====================================================
+       CLIENTS
+       ===================================================== */
 
-    .clients-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .client-grid {
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
         gap: 12px;
     }
 
     .client-card {
-        min-height: 100px;
-        padding: 20px 12px;
+        width: 100%;
+        min-width: 0;
+
+        padding: 20px 14px;
+    }
+
+    .client-card h3 {
+        font-size: 1.05rem;
+    }
+
+    .client-card p {
+        font-size: 0.85rem;
+        line-height: 1.55;
     }
 
 
-    /* -----------------------------------------------------
-       Process
-       ----------------------------------------------------- */
+    /* =====================================================
+       PROCESS / TIMELINE
+       ===================================================== */
 
-    .process-grid {
+    .timeline {
+        width: 100%;
+
+        display: grid;
         grid-template-columns: 1fr;
-        gap: 28px;
-    }
 
-    .process-item {
-        text-align: center;
-    }
-
-    .process-number {
-        margin-inline: auto;
-    }
-
-    .process-title {
-        font-size: 1.15rem;
-    }
-
-    .process-description {
-        font-size: 0.9rem;
-    }
-
-
-    /* -----------------------------------------------------
-       Why Choose Us
-       ----------------------------------------------------- */
-
-    .why-grid {
         gap: 30px;
     }
 
-    .why-features {
+    .step {
+        width: 100%;
+        min-width: 0;
+
+        text-align: center;
+    }
+
+    .step > span {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .step h3 {
+        font-size: 1.15rem;
+    }
+
+    .step p {
+        font-size: 0.9rem;
+        line-height: 1.65;
+    }
+
+
+    /* =====================================================
+       WHY CHOOSE US
+       ===================================================== */
+
+    .why-grid {
+        width: 100%;
+
+        display: grid;
         grid-template-columns: 1fr;
-        gap: 14px;
+
+        gap: 30px;
     }
 
-    .why-feature {
-        padding: 20px;
+    .why-copy {
+        width: 100%;
+        max-width: 100%;
     }
 
-
-    /* -----------------------------------------------------
-       CTA
-       ----------------------------------------------------- */
-
-    .cta-content {
-        padding: 45px 22px;
-        border-radius: 18px;
-    }
-
-    .cta-title {
+    .why-copy h2 {
         font-size: clamp(2rem, 9vw, 2.8rem);
         line-height: 1.1;
     }
 
-    .cta-description {
-        font-size: 0.95rem;
+    .check-list {
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: 1fr;
+
+        gap: 10px;
     }
 
-    .cta-buttons {
+    .check-list > div {
+        width: 100%;
+    }
+
+
+    /* =====================================================
+       CTA
+       ===================================================== */
+
+    .cta-section {
+        width: 100%;
+    }
+
+    .cta-content {
+        width: calc(100% - 32px);
+
+        margin-left: auto;
+        margin-right: auto;
+
+        display: flex;
         flex-direction: column;
+
+        gap: 30px;
+
+        padding: 40px 22px;
+    }
+
+    .cta-content h2 {
+        font-size: clamp(2rem, 9vw, 2.7rem);
+        line-height: 1.1;
+    }
+
+    .cta-content p {
+        font-size: 0.94rem;
+        line-height: 1.65;
+    }
+
+    .cta-actions {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 12px;
+    }
+
+    .cta-actions > *,
+    .cta-actions .btn {
         width: 100%;
     }
 
-    .cta-buttons .btn {
+
+    /* =====================================================
+       CALL DROPDOWN
+       ===================================================== */
+
+    .call-dropdown-wrapper {
+        position: relative;
         width: 100%;
-        justify-content: center;
+    }
+
+    .call-dropdown-button {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        min-height: 48px;
+    }
+
+    .call-dropdown {
+        position: absolute;
+
+        top: calc(100% + 8px);
+        left: 0;
+        right: 0;
+
+        width: 100%;
+
+        max-height: 260px;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        z-index: 99999;
+    }
+
+    .call-dropdown-list {
+        width: 100%;
+    }
+
+    .call-dropdown-list a,
+    .call-dropdown-list button {
+        width: 100%;
+        min-height: 48px;
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        FAQ
-       ----------------------------------------------------- */
+       ===================================================== */
+
+    .faq-layout {
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+    }
+
+    .faq-list {
+        width: 100%;
+    }
 
     .faq-item {
-        padding: 18px 16px;
+        width: 100%;
     }
 
     .faq-question {
-        gap: 15px;
-        font-size: 0.95rem;
+        width: 100%;
+
+        min-height: 50px;
+
+        gap: 12px;
+
+        text-align: left;
+
+        font-size: 0.94rem;
     }
 
     .faq-answer {
@@ -752,113 +943,143 @@ section {
     }
 
 
-    /* -----------------------------------------------------
-       Contact
-       ----------------------------------------------------- */
+    /* =====================================================
+       CONTACT
+       ===================================================== */
 
-    .contact-wrapper {
-        gap: 35px;
+    .contact-single {
+        width: 100%;
+        max-width: 100%;
     }
 
     .contact-info {
         width: 100%;
+        max-width: 100%;
+
+        padding: 30px 22px;
+    }
+
+    .contact-intro h3 {
+        font-size: 1.6rem;
+    }
+
+    .contact-intro p {
+        font-size: 0.92rem;
+        line-height: 1.65;
     }
 
     .contact-details {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+
         gap: 18px;
     }
 
     .contact-item {
-        gap: 13px;
-    }
-
-    .contact-form {
-        padding: 25px 20px;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-        gap: 0;
-    }
-
-    .form-group {
-        margin-bottom: 17px;
-    }
-
-    .form-control,
-    .form-input,
-    .form-select,
-    .form-textarea {
         width: 100%;
-        font-size: 0.95rem;
+
+        display: flex;
+
+        gap: 12px;
+
+        min-width: 0;
     }
 
-    .form-textarea {
-        min-height: 140px;
+    .contact-item > div:last-child {
+        min-width: 0;
+        overflow-wrap: anywhere;
     }
 
-    .contact-form .btn {
+    .contact-item a,
+    .contact-item p {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .contact-actions {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .contact-actions .btn {
         width: 100%;
         justify-content: center;
     }
 
 
-    /* -----------------------------------------------------
-       Footer
-       ----------------------------------------------------- */
+    /* =====================================================
+       FOOTER
+       ===================================================== */
 
     .footer {
-        padding-top: 55px;
+        width: 100%;
+
+        padding-top: 50px;
         padding-bottom: 25px;
     }
 
     .footer-grid {
+        width: 100%;
+
+        display: grid;
         grid-template-columns: 1fr;
+
         gap: 30px;
     }
 
-    .footer-contact {
-        grid-column: auto;
-    }
-
-    .footer-column {
+    .footer-grid > div {
         width: 100%;
+        min-width: 0;
     }
 
-    .footer-links {
-        gap: 8px;
+    .footer-grid a,
+    .footer-grid p {
+        overflow-wrap: anywhere;
+        word-break: break-word;
     }
 
     .footer-bottom {
-        flex-direction: column;
+        width: 100%;
+    }
+
+    .footer-bottom .container {
         text-align: center;
-        gap: 12px;
-        padding-top: 22px;
     }
 
-    .footer-social {
-        justify-content: center;
+    .socials {
+        display: flex;
+        flex-wrap: wrap;
     }
 
 
-    /* -----------------------------------------------------
-       Floating Buttons
-       ----------------------------------------------------- */
+    /* =====================================================
+       FLOATING BUTTONS
+       ===================================================== */
 
-    .floating-call,
-    .call-button {
+    .floating-contact {
         width: 48px;
         height: 48px;
-        right: 16px;
+
+        right: 15px;
         bottom: 75px;
+
+        z-index: 9990;
     }
 
-    .scroll-top,
-    .scroll-to-top {
+    .scroll-top {
         width: 42px;
         height: 42px;
-        right: 16px;
+
+        right: 15px;
         bottom: 18px;
+
+        z-index: 9990;
     }
 
 }
@@ -877,132 +1098,135 @@ section {
 
 
     /* -----------------------------------------------------
-       Navigation
+       NAVIGATION
        ----------------------------------------------------- */
 
     .navbar {
+        width: calc(100% - 24px);
         min-height: 60px;
     }
 
-    .nav-logo {
-        max-width: 120px;
+    .logo {
+        max-width: calc(100% - 55px);
     }
 
-
-    /* -----------------------------------------------------
-       Hero
-       ----------------------------------------------------- */
-
-    .hero {
-        padding: 75px 0 45px;
-    }
-
-    .hero-title {
-        font-size: clamp(2.25rem, 13vw, 3.2rem);
-    }
-
-    .hero-description {
-        font-size: 0.92rem;
-    }
-
-
-    /* -----------------------------------------------------
-       Newspaper
-       ----------------------------------------------------- */
-
-    .newspaper-page {
-        padding: 17px;
-    }
-
-    .newspaper-title {
-        font-size: 1.35rem;
-    }
-
-    .newspaper-headline {
-        font-size: 1.7rem;
-    }
-
-    .newspaper-subheadline {
-        font-size: 0.78rem;
-    }
-
-    .newspaper-image {
-        min-height: 135px;
-    }
-
-
-    /* -----------------------------------------------------
-       Statistics
-       ----------------------------------------------------- */
-
-    .stats-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-    }
-
-    .stat-card {
-        padding: 18px 8px;
-    }
-
-    .stat-number {
-        font-size: 1.7rem;
-    }
-
-    .stat-label {
-        font-size: 0.7rem;
-    }
-
-
-    /* -----------------------------------------------------
-       Section Titles
-       ----------------------------------------------------- */
-
-    .section-title {
-        font-size: 2rem;
-    }
-
-    .section-description {
+    .logo > span:last-child {
         font-size: 0.9rem;
     }
 
-
-    /* -----------------------------------------------------
-       Service Cards
-       ----------------------------------------------------- */
-
-    .service-card {
-        padding: 22px 18px;
-    }
-
-    .service-icon {
-        width: 46px;
-        height: 46px;
+    .logo-mark {
+        flex-shrink: 0;
     }
 
 
     /* -----------------------------------------------------
-       Clients
+       HERO
        ----------------------------------------------------- */
 
-    .clients-grid {
-        grid-template-columns: 1fr 1fr;
+    .hero {
+        padding-top: 70px;
+        padding-bottom: 45px;
+    }
+
+    .hero-grid {
+        gap: 32px;
+    }
+
+    .hero h1 {
+        font-size: clamp(2.15rem, 12vw, 3.2rem);
+    }
+
+    .hero-text {
+        font-size: 0.92rem;
+    }
+
+    .hero-trust {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 6px;
+    }
+
+    .hero-trust strong {
+        font-size: 0.78rem;
+    }
+
+    .hero-trust span {
+        font-size: 0.68rem;
+    }
+
+
+    /* -----------------------------------------------------
+       NEWSPAPER
+       ----------------------------------------------------- */
+
+    .paper-top {
+        font-size: 0.62rem;
+    }
+
+    .paper-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .floating-badge {
+        max-width: 125px;
+        padding: 7px 9px;
+        font-size: 0.65rem;
+    }
+
+
+    /* -----------------------------------------------------
+       SECTIONS
+       ----------------------------------------------------- */
+
+    .section {
+        padding-top: 55px;
+        padding-bottom: 55px;
+    }
+
+    .section-heading h2 {
+        font-size: 2rem;
+    }
+
+
+    /* -----------------------------------------------------
+       STATISTICS
+       ----------------------------------------------------- */
+
+    .stats-grid {
+        gap: 7px;
+    }
+
+    .stat-card {
+        padding: 17px 6px;
+    }
+
+    .stat-number,
+    .counter {
+        font-size: 1.65rem;
+    }
+
+    .stat-card span {
+        font-size: 0.68rem;
+    }
+
+
+    /* -----------------------------------------------------
+       CLIENTS
+       ----------------------------------------------------- */
+
+    .client-grid {
         gap: 8px;
     }
 
     .client-card {
-        min-height: 85px;
-        padding: 15px 8px;
+        padding: 16px 9px;
     }
 
+    .client-card h3 {
+        font-size: 0.98rem;
+    }
 
-    /* -----------------------------------------------------
-       Process
-       ----------------------------------------------------- */
-
-    .process-number {
-        width: 52px;
-        height: 52px;
-        font-size: 0.9rem;
+    .client-card p {
+        font-size: 0.78rem;
     }
 
 
@@ -1011,38 +1235,35 @@ section {
        ----------------------------------------------------- */
 
     .cta-content {
-        padding: 35px 18px;
-        border-radius: 14px;
+        width: calc(100% - 24px);
+
+        padding: 32px 17px;
     }
 
-    .cta-title {
+    .cta-content h2 {
         font-size: 1.9rem;
     }
 
 
     /* -----------------------------------------------------
-       Contact
+       CONTACT
        ----------------------------------------------------- */
 
-    .contact-form {
-        padding: 22px 16px;
+    .contact-info {
+        padding: 25px 17px;
     }
 
-    .contact-item {
-        align-items: flex-start;
+    .contact-intro h3 {
+        font-size: 1.45rem;
     }
 
 
     /* -----------------------------------------------------
-       Footer
+       FOOTER
        ----------------------------------------------------- */
 
     .footer {
-        padding-top: 45px;
-    }
-
-    .footer-logo {
-        max-width: 130px;
+        padding-top: 42px;
     }
 
 }
@@ -1059,31 +1280,72 @@ section {
         width: calc(100% - 20px);
     }
 
-    .hero-title {
-        font-size: 2.15rem;
+    .navbar {
+        width: calc(100% - 20px);
     }
 
-    .newspaper-page {
-        padding: 14px;
+
+    /* -----------------------------------------------------
+       HERO
+       ----------------------------------------------------- */
+
+    .hero h1 {
+        font-size: 2.05rem;
     }
 
-    .newspaper-headline {
-        font-size: 1.5rem;
+    .hero-text {
+        font-size: 0.88rem;
     }
+
+    .hero-trust strong {
+        font-size: 0.72rem;
+    }
+
+    .hero-trust span {
+        font-size: 0.62rem;
+    }
+
+
+    /* -----------------------------------------------------
+       STATS
+       ----------------------------------------------------- */
 
     .stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .stats-grid .stat-card:last-child {
+        grid-column: 1 / -1;
+        max-width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    /* -----------------------------------------------------
+       CLIENTS
+       ----------------------------------------------------- */
+
+    .client-grid {
         grid-template-columns: 1fr;
     }
 
-    .clients-grid {
-        grid-template-columns: 1fr;
-    }
 
-    .section-title {
+    /* -----------------------------------------------------
+       SECTION TITLES
+       ----------------------------------------------------- */
+
+    .section-heading h2,
+    .why-copy h2 {
         font-size: 1.8rem;
     }
 
-    .cta-title {
+
+    /* -----------------------------------------------------
+       CTA
+       ----------------------------------------------------- */
+
+    .cta-content h2 {
         font-size: 1.7rem;
     }
 
@@ -1097,21 +1359,26 @@ section {
 @media (max-width: 767px) and (orientation: landscape) {
 
     .hero {
-        padding-top: 70px;
-        padding-bottom: 45px;
+        padding-top: 65px;
+        padding-bottom: 40px;
     }
 
-    .hero-content {
+    .hero-grid {
         gap: 30px;
     }
 
-    .hero-title {
-        font-size: 2.7rem;
+    .hero h1 {
+        font-size: 2.6rem;
     }
 
-    .newspaper {
+    .hero-actions {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-visual {
         max-width: 600px;
-        margin-inline: auto;
     }
 
 }
@@ -1124,23 +1391,24 @@ section {
 @media (hover: none) and (pointer: coarse) {
 
     /*
-       Remove hover-dependent transforms on touch devices.
-       This prevents cards from jumping while scrolling.
+       Prevent hover animations from causing layout
+       movement on phones and tablets.
     */
 
     .service-card:hover,
     .feature-card:hover,
     .stat-card:hover,
     .client-card:hover,
-    .process-item:hover {
+    .step:hover {
         transform: none;
     }
 
     /*
-       Make interactive elements easier to tap.
+       Comfortable touch targets.
     */
 
-    .nav-links a,
+    .nav-toggle,
+    .nav-menu a,
     .btn,
     button,
     .faq-question {
@@ -1160,8 +1428,10 @@ section {
     *::before,
     *::after {
         scroll-behavior: auto !important;
+
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
+
         transition-duration: 0.01ms !important;
     }
 
@@ -1174,16 +1444,15 @@ section {
 
 @media print {
 
-    .navbar,
-    .nav-links,
-    .hero-buttons,
-    .floating-call,
-    .call-button,
+    .header,
+    .nav-menu,
+    .nav-toggle,
+    .hero-actions,
+    .floating-contact,
     .scroll-top,
-    .scroll-to-top,
-    .cta,
-    .contact-form,
-    .footer-social {
+    .cta-section,
+    .contact-actions,
+    .socials {
         display: none !important;
     }
 
@@ -1196,7 +1465,7 @@ section {
         break-inside: avoid;
     }
 
-    .newspaper {
+    .newspaper-card {
         transform: none !important;
         box-shadow: none !important;
     }
