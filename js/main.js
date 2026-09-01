@@ -1181,27 +1181,9 @@ const PHONE_NUMBERS = [
     },
 
     {
-        label: "Office Contact",
-        number: "+91 98765 43211",
-        tel: "+919876543211"
-    },
-
-    {
-        label: "Advertising Enquiries",
-        number: "+91 98765 43212",
-        tel: "+919876543212"
-    },
-
-    {
-        label: "Media Services",
-        number: "+91 98765 43213",
-        tel: "+919876543213"
-    },
-
-    {
-        label: "Customer Support",
-        number: "+91 98765 43214",
-        tel: "+919876543214"
+        label: "Secondary Contact",
+        number: "+91 91230 37075",
+        tel: "+919123037075"
     }
 
 ];
