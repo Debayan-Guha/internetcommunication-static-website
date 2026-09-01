@@ -2,10 +2,8 @@
    RESPONSIVE.CSS
    Internet Communication
    ---------------------------------------------------------
-   IMPORTANT:
-   This file is written specifically for the current
-   index.html structure.
-
+   Corrected responsive layout
+   ---------------------------------------------------------
    Main breakpoints:
    - Large tablet / small desktop : 1200px
    - Tablet                       : 1024px
@@ -48,10 +46,17 @@ svg {
     margin-right: auto;
 }
 
+
+/*
+   IMPORTANT:
+   Do NOT globally use overflow:hidden on every section.
+   Dropdowns such as the Call Number dropdown need to
+   extend outside their parent section.
+*/
+
 section {
     width: 100%;
     max-width: 100%;
-    overflow: hidden;
 }
 
 
@@ -157,8 +162,6 @@ section {
 
     /*
        Keep desktop navigation until mobile.
-       This prevents the layout from suddenly changing
-       at tablet widths.
     */
 
     .nav-menu {
@@ -293,9 +296,20 @@ section {
        CTA
        ===================================================== */
 
+    .cta-section {
+        position: relative;
+        overflow: visible !important;
+        z-index: 50;
+    }
+
     .cta-content {
         gap: 35px;
         padding: 50px 40px;
+    }
+
+    .cta-section .container {
+        position: relative;
+        z-index: 51;
     }
 
 
@@ -374,13 +388,14 @@ section {
         min-height: 64px;
     }
 
-    /*
-       IMPORTANT:
-       The actual HTML uses .nav-toggle and .nav-menu.
-    */
+
+    /* -----------------------------------------------------
+       BURGER BUTTON
+       ----------------------------------------------------- */
 
     .nav-toggle {
         display: flex;
+
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -389,25 +404,26 @@ section {
         height: 44px;
 
         padding: 0;
+
         flex-shrink: 0;
+
+        position: relative;
+        z-index: 1100;
     }
 
     .nav-toggle span {
         display: block;
+
         width: 22px;
         height: 2px;
+
         margin: 3px 0;
     }
 
 
-    /*
-       Mobile menu.
-       JavaScript should add/remove the appropriate
-       active/open class.
-
-       We support several common class names so the
-       menu works with existing JS.
-    */
+    /* -----------------------------------------------------
+       MOBILE MENU
+       ----------------------------------------------------- */
 
     .nav-menu {
         position: absolute;
@@ -426,6 +442,14 @@ section {
         gap: 0;
 
         padding: 15px 16px 20px;
+
+        background: #ffffff;
+
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 12px;
+
+        box-shadow:
+            0 15px 35px rgba(0, 0, 0, 0.15);
 
         z-index: 9999;
     }
@@ -448,16 +472,10 @@ section {
         font-size: 0.98rem;
     }
 
-    /*
-       Hide both desktop CTA buttons inside the mobile
-       navigation only if there are too many items.
-       Contact / Call remain accessible through the
-       mobile menu.
-    */
-
     .nav-menu .nav-cta {
         width: 100%;
         justify-content: center;
+
         margin-top: 6px;
     }
 
@@ -583,11 +601,6 @@ section {
     .paper-image {
         width: 100%;
     }
-
-    /*
-       Prevent floating badges from pushing outside
-       the mobile screen.
-    */
 
     .floating-badge {
         max-width: 150px;
@@ -815,6 +828,23 @@ section {
 
     .cta-section {
         width: 100%;
+
+        /*
+           VERY IMPORTANT:
+           The Call dropdown must be allowed to extend
+           outside the CTA section.
+        */
+
+        position: relative;
+
+        overflow: visible !important;
+
+        z-index: 50;
+    }
+
+    .cta-section .container {
+        position: relative;
+        z-index: 51;
     }
 
     .cta-content {
@@ -829,6 +859,12 @@ section {
         gap: 30px;
 
         padding: 40px 22px;
+
+        /*
+           Make sure dropdown is not clipped.
+        */
+
+        overflow: visible;
     }
 
     .cta-content h2 {
@@ -849,6 +885,16 @@ section {
         align-items: stretch;
 
         gap: 12px;
+
+        /*
+           IMPORTANT:
+           Do not clip the call dropdown.
+        */
+
+        overflow: visible;
+
+        position: relative;
+        z-index: 100;
     }
 
     .cta-actions > *,
@@ -863,44 +909,187 @@ section {
 
     .call-dropdown-wrapper {
         position: relative;
+
         width: 100%;
+
+        /*
+           Allow dropdown to extend outside wrapper.
+        */
+
+        overflow: visible;
+
+        z-index: 9999;
     }
+
+
+    /* -----------------------------------------------------
+       CALL BUTTON
+       ----------------------------------------------------- */
 
     .call-dropdown-button {
         width: 100%;
 
         display: flex;
+
         align-items: center;
         justify-content: space-between;
 
         min-height: 48px;
     }
 
+
+    /* -----------------------------------------------------
+       DROPDOWN CONTAINER
+       -----------------------------------------------------
+
+       IMPORTANT FIX:
+
+       Previously BOTH the dropdown and the list had
+       overflow-y:auto.
+
+       That created nested scrolling on mobile.
+
+       Now ONLY .call-dropdown-list scrolls.
+    */
+
     .call-dropdown {
         position: absolute;
 
         top: calc(100% + 8px);
+
         left: 0;
         right: 0;
 
         width: 100%;
 
-        max-height: 260px;
+        /*
+           Do NOT create another scroll container here.
+        */
 
-        overflow-y: auto;
-        overflow-x: hidden;
+        max-height: none;
+
+        overflow: visible;
+
+        overflow-x: visible;
+
+        /*
+           Keep above the following section.
+        */
 
         z-index: 99999;
     }
 
+
+    /* -----------------------------------------------------
+       DROPDOWN LIST
+       -----------------------------------------------------
+
+       ONLY THIS ELEMENT SCROLLS.
+    */
+
     .call-dropdown-list {
         width: 100%;
+
+        /*
+           Mobile-friendly height.
+
+           45vh means the list can use approximately
+           45% of the visible phone screen.
+
+           This allows many numbers to be displayed
+           without making the dropdown too large.
+        */
+
+        max-height: 45vh;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        /*
+           Important for iPhone / Android touch scrolling.
+        */
+
+        -webkit-overflow-scrolling: touch;
+
+        /*
+           Tell the browser this area is intended
+           for vertical touch scrolling.
+        */
+
+        touch-action: pan-y;
+
+        /*
+           Prevent scroll chaining from moving the
+           whole page while the user is scrolling
+           through phone numbers.
+        */
+
+        overscroll-behavior-y: contain;
+
+        /*
+           Always reserve scrollbar space.
+        */
+
+        scrollbar-gutter: stable;
     }
+
+
+    /* -----------------------------------------------------
+       NUMBER ITEMS
+       ----------------------------------------------------- */
 
     .call-dropdown-list a,
     .call-dropdown-list button {
         width: 100%;
-        min-height: 48px;
+
+        min-height: 52px;
+
+        flex-shrink: 0;
+    }
+
+    .call-number-item {
+        min-height: 52px;
+
+        padding: 14px 15px;
+
+        /*
+           Prevent long phone numbers from creating
+           horizontal overflow.
+        */
+
+        min-width: 0;
+    }
+
+    .call-number-text {
+        min-width: 0;
+    }
+
+    .call-number-value {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+
+    /* -----------------------------------------------------
+       MOBILE DROPDOWN SCROLLBAR
+       ----------------------------------------------------- */
+
+    .call-dropdown-list::-webkit-scrollbar {
+        width: 7px;
+    }
+
+    .call-dropdown-list::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .call-dropdown-list::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.25);
+
+        border-radius: 10px;
+    }
+
+    .call-dropdown-list::-webkit-scrollbar-thumb:hover {
+        background: rgba(0, 0, 0, 0.4);
     }
 
 
@@ -1168,7 +1357,9 @@ section {
 
     .floating-badge {
         max-width: 125px;
+
         padding: 7px 9px;
+
         font-size: 0.65rem;
     }
 
@@ -1238,10 +1429,60 @@ section {
         width: calc(100% - 24px);
 
         padding: 32px 17px;
+
+        overflow: visible;
+    }
+
+    .cta-actions {
+        overflow: visible;
     }
 
     .cta-content h2 {
         font-size: 1.9rem;
+    }
+
+
+    /* -----------------------------------------------------
+       CALL DROPDOWN
+       ----------------------------------------------------- */
+
+    .call-dropdown {
+        width: 100%;
+
+        top: calc(100% + 8px);
+
+        /*
+           Keep the dropdown itself non-scrollable.
+        */
+
+        max-height: none;
+
+        overflow: visible;
+    }
+
+    .call-dropdown-list {
+        /*
+           Slightly smaller on very small screens.
+        */
+
+        max-height: 42vh;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        -webkit-overflow-scrolling: touch;
+
+        touch-action: pan-y;
+
+        overscroll-behavior-y: contain;
+
+        scrollbar-gutter: stable;
+    }
+
+    .call-number-item {
+        padding: 14px 15px;
+
+        min-height: 52px;
     }
 
 
@@ -1316,7 +1557,9 @@ section {
 
     .stats-grid .stat-card:last-child {
         grid-column: 1 / -1;
+
         max-width: 50%;
+
         margin-left: auto;
         margin-right: auto;
     }
@@ -1349,6 +1592,20 @@ section {
         font-size: 1.7rem;
     }
 
+
+    /* -----------------------------------------------------
+       CALL DROPDOWN
+       ----------------------------------------------------- */
+
+    .call-dropdown-list {
+        /*
+           On very small phones, don't allow the list
+           to consume too much of the screen.
+        */
+
+        max-height: 40vh;
+    }
+
 }
 
 
@@ -1373,12 +1630,23 @@ section {
 
     .hero-actions {
         max-width: 500px;
+
         margin-left: auto;
         margin-right: auto;
     }
 
     .hero-visual {
         max-width: 600px;
+    }
+
+
+    /*
+       In landscape mode there is less vertical space,
+       so make the phone list smaller.
+    */
+
+    .call-dropdown-list {
+        max-height: 55vh;
     }
 
 }
@@ -1403,6 +1671,7 @@ section {
         transform: none;
     }
 
+
     /*
        Comfortable touch targets.
     */
@@ -1413,6 +1682,20 @@ section {
     button,
     .faq-question {
         min-height: 44px;
+    }
+
+
+    /*
+       Improve touch scrolling specifically for
+       the phone-number list.
+    */
+
+    .call-dropdown-list {
+        -webkit-overflow-scrolling: touch;
+
+        touch-action: pan-y;
+
+        overscroll-behavior-y: contain;
     }
 
 }
