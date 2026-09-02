@@ -68,7 +68,11 @@ const CONFIG = {
         "toi.png",
         "ekdin.png",
         "vishwamitra.png",
-        "dainiksambad.png"
+        "dainiksambad.png",
+        "ie.png",
+        "fe.png",
+        "jannasatta.png",
+        "durantabarta.png"
     ],
 
     /* --------------------------------------------------------
@@ -78,14 +82,97 @@ const CONFIG = {
    Images should be in:
    assets/client-logos/
 -------------------------------------------------------- */
-clientsServed: [
-    {logo:"bansberia.png",name:"Bansberia Municipality"},
-    {logo:"panihati.png",name:"Panihati Municipality"},
-    {logo:"kharda.png",name:"Khardaha Municipality"},
-    {logo:"beldanga.png",name:"Beldanga Municipality"},
-    {name:"Beraberia Gram Panchayat"},
-    {logo:"barasat.png",name:"Barasat Municipality"}
-],
+    clientsServed: [
+        { name: "A.P.C. College" },
+        { name: "Adhata Gram Panchayat" },
+        { name: "Akaipur Gram Panchayat" },
+        { name: "Amta Gram Panchayat" },
+        { name: "Amdanga Gram Panchayat" },
+        { name: "Amdanga Panchayat Samiti" },
+        { name: "Baduria Municipality" },
+        { name: "Bairampur Gram Panchayat" },
+        { name: "Bandipur Gram Panchayat" },
+        { name: "Bansberia Municipality" },
+        { name: "Barasat Municipality" },
+        { name: "Barasat-I Block Development Office" },
+        { name: "Baruipur Municipality" },
+        { name: "Basanti Gram Panchayat" },
+        { name: "Basantipur Gram Panchayat" },
+        { name: "Basirhat Municipality" },
+        { name: "Beraberi Gram Panchayat" },
+        { name: "Beraberia Gram Panchayat" },
+        { name: "Bergoom-I Gram Panchayat" },
+        { name: "Bergoom-II Gram Panchayat" },
+        { name: "Bhatpara Municipality" },
+        { name: "Bilkanda-II Gram Panchayat" },
+        { name: "Bishpur Gram Panchayat" },
+        { name: "Bodai Gram Panchayat" },
+        { name: "Bongaon Municipality" },
+        { name: "Budge Budge Municipality" },
+        { name: "Chandigarh-Rohanda Gram Panchayat" },
+        { name: "Chandpara Gram Panchayat" },
+        { name: "Cooper's Camp Notified Area Authority" },
+        { name: "Daihat Municipality" },
+        { name: "Dakshin Jhapardah Gram Panchayat" },
+        { name: "Dankuni Municipality" },
+        { name: "Dharmmapukuria Gram Panchayat" },
+        { name: "Dharmapur-II Gram Panchayat" },
+        { name: "Diamond Harbour Municipality" },
+        { name: "Dighari Gram Panchayat" },
+        { name: "Dum Dum Municipality" },
+        { name: "Duma Gram Panchayat" },
+        { name: "Fulsara Gram Panchayat" },
+        { name: "Garulia Municipality" },
+        { name: "Gobardanga Hindu College" },
+        { name: "Gopalnagar-I Gram Panchayat" },
+        { name: "Ghoraberia Chitnan Gram Panchayat" },
+        { name: "Hasnabad Gram Panchayat" },
+        { name: "Hasnabad Panchayat Samiti" },
+        { name: "Ichapur-I Gram Panchayat" },
+        { name: "Ichapur Nilgunj Gram Panchayat" },
+        { name: "Jaleswar-II Gram Panchayat" },
+        { name: "Jaynagar Majilpur Municipality" },
+        { name: "Jetia Gram Panchayat" },
+        { name: "Jhowdanga Gram Panchayat" },
+        { name: "Jyangra Hatiara-II Gram Panchayat" },
+        { name: "Kalupur Gram Panchayat" },
+        { name: "Kanchrapara Municipality" },
+        { name: "Kashimpur Gram Panchayat" },
+        { name: "Khardaha Municipality" },
+        { name: "Kowgachi-I Gram Panchayat" },
+        { name: "Krishnanagar Municipality" },
+        { name: "Kumra Gram Panchayat" },
+        { name: "Lalupur Gram Panchayat" },
+        { name: "Malipoto Gram Panchayat" },
+        { name: "Mamudpur Gram Panchayat" },
+        { name: "Maricha Gram Panchayat" },
+        { name: "Mohanpur Gram Panchayat" },
+        { name: "Murshidabad Municipality" },
+        { name: "Nabadwip Municipality" },
+        { name: "Naihati Municipality" },
+        { name: "New Barrackpur Municipality" },
+        { name: "North Barrackpore Municipality" },
+        { name: "Palla Gram Panchayat" },
+        { name: "Panihati Municipality" },
+        { name: "Panpur Keutia Gram Panchayat" },
+        { name: "Paschim Khilkapur Gram Panchayat" },
+        { name: "Pathar Ghata Gram Panchayat" },
+        { name: "Pujali Municipality" },
+        { name: "Purba Khilkapur Gram Panchayat" },
+        { name: "Rajibpur Bira Gram Panchayat" },
+        { name: "Rajpur Sonarpur Municipality" },
+        { name: "Ranaghat Municipality" },
+        { name: "Rupamari Gram Panchayat" },
+        { name: "Santipur Municipality" },
+        { name: "Sankchura Begundi Gram Panchayat" },
+        { name: "Shasan Gram Panchayat" },
+        { name: "Sirajbati Gram Panchayat" },
+        { name: "Sripat Singh College" },
+        { name: "Taki Municipality" },
+        { name: "Taraberia Gram Panchayat" },
+        { name: "Titagarh Municipality" },
+        { name: "Uttarpara Kotrung Municipality" }
+    ],
 
 
     /* --------------------------------------------------------
@@ -949,7 +1036,7 @@ function initMediaPartners() {
     images.forEach(img => {
         // Remove lazy loading to ensure immediate load
         img.removeAttribute('loading');
-        
+
         // If image already loaded
         if (img.complete && img.naturalHeight !== 0) {
             checkAllLoaded();
@@ -957,7 +1044,7 @@ function initMediaPartners() {
             // Set up load event
             img.addEventListener('load', checkAllLoaded);
             img.addEventListener('error', checkAllLoaded);
-            
+
             // Force reload if already in cache but not complete
             if (img.complete && img.naturalHeight === 0) {
                 // Image failed to load
@@ -976,7 +1063,7 @@ function initMediaPartners() {
 
     // Override startAnimation to clear fallback
     const originalStart = startAnimation;
-    startAnimation = function() {
+    startAnimation = function () {
         clearTimeout(fallbackTimer);
         originalStart();
     };
@@ -1018,7 +1105,7 @@ function updateAnimationSettings() {
     // Get actual track width
     const trackWidth = track.scrollWidth;
     const viewportWidth = track.parentElement.clientWidth;
-    
+
     // Calculate how much to scroll to show all logos
     let scrollPercentage = 0;
     if (trackWidth > viewportWidth) {
@@ -1026,14 +1113,14 @@ function updateAnimationSettings() {
         // Add a small buffer so last logos are fully visible
         scrollPercentage = Math.min(scrollPercentage + 5, 85);
     }
-    
+
     // Set the scroll distance as CSS variable
     track.style.setProperty('--scroll-distance', `-${scrollPercentage}%`);
-    
+
     // Calculate animation duration based on number of logos
     const baseDuration = Math.max(20, partners.length * 2.5);
     track.style.setProperty('--animation-duration', `${baseDuration}s`);
-    
+
     console.log(`📊 Partners: ${partners.length} | Scroll: ${scrollPercentage.toFixed(1)}% | Duration: ${baseDuration}s`);
 }
 
@@ -1063,110 +1150,110 @@ function createPartnerItems(partners) {
 /* ============================================================
    22. CLIENTS / ORGANIZATIONS SERVED - FULLY DYNAMIC RENDER
 ============================================================ */
-function initClientsServed(){
-    const track=document.getElementById('clientTrack');
-    if(!track)return;
-    const clients=CONFIG.clientsServed||[];
-    if(clients.length===0){
-        const wrapper=document.querySelector('.clients-track-wrapper');
-        if(wrapper){
-            wrapper.innerHTML=`
+function initClientsServed() {
+    const track = document.getElementById('clientTrack');
+    if (!track) return;
+    const clients = CONFIG.clientsServed || [];
+    if (clients.length === 0) {
+        const wrapper = document.querySelector('.clients-track-wrapper');
+        if (wrapper) {
+            wrapper.innerHTML = `
                 <div class="no-clients-message">
                     <span>🏢</span>
                     Adding client organizations soon...
                 </div>
             `;
-            wrapper.style.padding='40px 0';
+            wrapper.style.padding = '40px 0';
         }
         return;
     }
-    const itemsHTML=createClientItems(clients);
-    track.innerHTML=itemsHTML;
-    track.style.animationPlayState='paused';
-    const images=track.querySelectorAll('img');
-    const totalImages=images.length;
-    let loadedCount=0;
-    let imagesLoaded=false;
-    function checkAllLoaded(){
+    const itemsHTML = createClientItems(clients);
+    track.innerHTML = itemsHTML;
+    track.style.animationPlayState = 'paused';
+    const images = track.querySelectorAll('img');
+    const totalImages = images.length;
+    let loadedCount = 0;
+    let imagesLoaded = false;
+    function checkAllLoaded() {
         loadedCount++;
-        if(loadedCount>=totalImages&&!imagesLoaded){
-            imagesLoaded=true;
+        if (loadedCount >= totalImages && !imagesLoaded) {
+            imagesLoaded = true;
             startAnimation();
         }
     }
-    function startAnimation(){
+    function startAnimation() {
         updateClientAnimationSettings();
-        track.style.animationPlayState='running';
+        track.style.animationPlayState = 'running';
         console.log(`✅ All ${totalImages} client logos loaded! Animation started.`);
     }
-    if(totalImages===0){
+    if (totalImages === 0) {
         startAnimation();
         return;
     }
-    images.forEach(img=>{
+    images.forEach(img => {
         img.removeAttribute('loading');
-        if(img.complete&&img.naturalHeight!==0){
+        if (img.complete && img.naturalHeight !== 0) {
             checkAllLoaded();
-        }else{
-            img.addEventListener('load',checkAllLoaded);
-            img.addEventListener('error',checkAllLoaded);
-            if(img.complete&&img.naturalHeight===0){
+        } else {
+            img.addEventListener('load', checkAllLoaded);
+            img.addEventListener('error', checkAllLoaded);
+            if (img.complete && img.naturalHeight === 0) {
                 checkAllLoaded();
             }
         }
     });
-    const fallbackTimer=setTimeout(()=>{
-        if(!imagesLoaded){
-            console.warn(`⚠️ ${totalImages-loadedCount} client images not loaded after 3s. Starting animation anyway.`);
+    const fallbackTimer = setTimeout(() => {
+        if (!imagesLoaded) {
+            console.warn(`⚠️ ${totalImages - loadedCount} client images not loaded after 3s. Starting animation anyway.`);
             startAnimation();
         }
-    },3000);
-    const originalStart=startAnimation;
-    startAnimation=function(){
+    }, 3000);
+    const originalStart = startAnimation;
+    startAnimation = function () {
         clearTimeout(fallbackTimer);
         originalStart();
     };
     let resizeTimer;
-    window.addEventListener('resize',()=>{
+    window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
-        resizeTimer=setTimeout(()=>{
-            if(track.style.animationPlayState!=='paused'){
+        resizeTimer = setTimeout(() => {
+            if (track.style.animationPlayState !== 'paused') {
                 updateClientAnimationSettings();
             }
-        },250);
+        }, 250);
     });
-    const wrapper=document.querySelector('.clients-track-wrapper');
-    if(wrapper){
-        wrapper.addEventListener('mouseenter',()=>{
-            track.style.animationPlayState='paused';
+    const wrapper = document.querySelector('.clients-track-wrapper');
+    if (wrapper) {
+        wrapper.addEventListener('mouseenter', () => {
+            track.style.animationPlayState = 'paused';
         });
-        wrapper.addEventListener('mouseleave',()=>{
-            track.style.animationPlayState='running';
+        wrapper.addEventListener('mouseleave', () => {
+            track.style.animationPlayState = 'running';
         });
     }
 }
-function updateClientAnimationSettings(){
-    const track=document.getElementById('clientTrack');
-    if(!track)return;
-    const clients=CONFIG.clientsServed||[];
-    if(clients.length===0)return;
-    const trackWidth=track.scrollWidth;
-    const viewportWidth=track.parentElement.clientWidth;
-    let scrollPercentage=0;
-    if(trackWidth>viewportWidth){
-        scrollPercentage=((trackWidth-viewportWidth)/trackWidth)*100;
-        scrollPercentage=Math.min(scrollPercentage+5,85);
+function updateClientAnimationSettings() {
+    const track = document.getElementById('clientTrack');
+    if (!track) return;
+    const clients = CONFIG.clientsServed || [];
+    if (clients.length === 0) return;
+    const trackWidth = track.scrollWidth;
+    const viewportWidth = track.parentElement.clientWidth;
+    let scrollPercentage = 0;
+    if (trackWidth > viewportWidth) {
+        scrollPercentage = ((trackWidth - viewportWidth) / trackWidth) * 100;
+        scrollPercentage = Math.min(scrollPercentage + 5, 85);
     }
-    track.style.setProperty('--scroll-distance',`-${scrollPercentage}%`);
-    const baseDuration=Math.max(20,clients.length*2.5);
-    track.style.setProperty('--animation-duration',`${baseDuration}s`);
+    track.style.setProperty('--scroll-distance', `-${scrollPercentage}%`);
+    const baseDuration = Math.max(20, clients.length * 2.5);
+    track.style.setProperty('--animation-duration', `${baseDuration}s`);
     console.log(`📊 Clients: ${clients.length} | Scroll: ${scrollPercentage.toFixed(1)}% | Duration: ${baseDuration}s`);
 }
-function createClientItems(clients){
-    return clients.map(client=>{
-        const name=client.name||"Organization";
-        const imagePath=client.logo?`assets/client-logos/${client.logo}`:"";
-        if(!client.logo){
+function createClientItems(clients) {
+    return clients.map(client => {
+        const name = client.name || "Organization";
+        const imagePath = client.logo ? `assets/client-logos/${client.logo}` : "";
+        if (!client.logo) {
             return `
                 <div class="client-item no-logo">
                     <span class="client-name">${name}</span>
