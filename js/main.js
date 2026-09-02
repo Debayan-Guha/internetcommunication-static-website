@@ -71,6 +71,22 @@ const CONFIG = {
         "dainiksambad.png"
     ],
 
+    /* --------------------------------------------------------
+   ORGANIZATIONS / CLIENTS WE HAVE WORKED WITH
+
+   Just add the image filename.
+   Images should be in:
+   assets/client-logos/
+-------------------------------------------------------- */
+clientsServed: [
+    {logo:"bansberia.png",name:"Bansberia Municipality"},
+    {logo:"panihati.png",name:"Panihati Municipality"},
+    {logo:"kharda.png",name:"Khardaha Municipality"},
+    {logo:"beldanga.png",name:"Beldanga Municipality"},
+    {name:"Beraberia Gram Panchayat"},
+    {logo:"barasat.png",name:"Barasat Municipality"}
+],
+
 
     /* --------------------------------------------------------
        NAVBAR SCROLL
@@ -144,6 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initExternalLinks();
     fixMobileMenuButtons();
     initMediaPartners();
+    initClientsServed();
 });
 
 /* ============================================================
@@ -864,7 +881,7 @@ if (window.location.hostname === "localhost" || window.location.hostname === "12
 }
 
 /* ============================================================
-   MEDIA PARTNERS - FULLY DYNAMIC RENDER (FIXED - NO LAZY LOAD)
+   21. MEDIA PARTNERS - FULLY DYNAMIC RENDER (FIXED - NO LAZY LOAD)
    ============================================================ */
 
 function initMediaPartners() {
@@ -1037,6 +1054,131 @@ function createPartnerItems(partners) {
                     title="${name}"
                     onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\\'partner-name\\'>${name}</span>';"
                 >
+            </div>
+        `;
+    }).join('');
+}
+
+
+/* ============================================================
+   22. CLIENTS / ORGANIZATIONS SERVED - FULLY DYNAMIC RENDER
+============================================================ */
+function initClientsServed(){
+    const track=document.getElementById('clientTrack');
+    if(!track)return;
+    const clients=CONFIG.clientsServed||[];
+    if(clients.length===0){
+        const wrapper=document.querySelector('.clients-track-wrapper');
+        if(wrapper){
+            wrapper.innerHTML=`
+                <div class="no-clients-message">
+                    <span>🏢</span>
+                    Adding client organizations soon...
+                </div>
+            `;
+            wrapper.style.padding='40px 0';
+        }
+        return;
+    }
+    const itemsHTML=createClientItems(clients);
+    track.innerHTML=itemsHTML;
+    track.style.animationPlayState='paused';
+    const images=track.querySelectorAll('img');
+    const totalImages=images.length;
+    let loadedCount=0;
+    let imagesLoaded=false;
+    function checkAllLoaded(){
+        loadedCount++;
+        if(loadedCount>=totalImages&&!imagesLoaded){
+            imagesLoaded=true;
+            startAnimation();
+        }
+    }
+    function startAnimation(){
+        updateClientAnimationSettings();
+        track.style.animationPlayState='running';
+        console.log(`✅ All ${totalImages} client logos loaded! Animation started.`);
+    }
+    if(totalImages===0){
+        startAnimation();
+        return;
+    }
+    images.forEach(img=>{
+        img.removeAttribute('loading');
+        if(img.complete&&img.naturalHeight!==0){
+            checkAllLoaded();
+        }else{
+            img.addEventListener('load',checkAllLoaded);
+            img.addEventListener('error',checkAllLoaded);
+            if(img.complete&&img.naturalHeight===0){
+                checkAllLoaded();
+            }
+        }
+    });
+    const fallbackTimer=setTimeout(()=>{
+        if(!imagesLoaded){
+            console.warn(`⚠️ ${totalImages-loadedCount} client images not loaded after 3s. Starting animation anyway.`);
+            startAnimation();
+        }
+    },3000);
+    const originalStart=startAnimation;
+    startAnimation=function(){
+        clearTimeout(fallbackTimer);
+        originalStart();
+    };
+    let resizeTimer;
+    window.addEventListener('resize',()=>{
+        clearTimeout(resizeTimer);
+        resizeTimer=setTimeout(()=>{
+            if(track.style.animationPlayState!=='paused'){
+                updateClientAnimationSettings();
+            }
+        },250);
+    });
+    const wrapper=document.querySelector('.clients-track-wrapper');
+    if(wrapper){
+        wrapper.addEventListener('mouseenter',()=>{
+            track.style.animationPlayState='paused';
+        });
+        wrapper.addEventListener('mouseleave',()=>{
+            track.style.animationPlayState='running';
+        });
+    }
+}
+function updateClientAnimationSettings(){
+    const track=document.getElementById('clientTrack');
+    if(!track)return;
+    const clients=CONFIG.clientsServed||[];
+    if(clients.length===0)return;
+    const trackWidth=track.scrollWidth;
+    const viewportWidth=track.parentElement.clientWidth;
+    let scrollPercentage=0;
+    if(trackWidth>viewportWidth){
+        scrollPercentage=((trackWidth-viewportWidth)/trackWidth)*100;
+        scrollPercentage=Math.min(scrollPercentage+5,85);
+    }
+    track.style.setProperty('--scroll-distance',`-${scrollPercentage}%`);
+    const baseDuration=Math.max(20,clients.length*2.5);
+    track.style.setProperty('--animation-duration',`${baseDuration}s`);
+    console.log(`📊 Clients: ${clients.length} | Scroll: ${scrollPercentage.toFixed(1)}% | Duration: ${baseDuration}s`);
+}
+function createClientItems(clients){
+    return clients.map(client=>{
+        const name=client.name||"Organization";
+        const imagePath=client.logo?`assets/client-logos/${client.logo}`:"";
+        if(!client.logo){
+            return `
+                <div class="client-item no-logo">
+                    <span class="client-name">${name}</span>
+                </div>
+            `;
+        }
+        return `
+            <div class="client-item">
+                <div class="client-logo">
+                    <img src="${imagePath}" alt="${name}" title="${name}" onerror="this.style.display='none';this.parentElement.classList.add('logo-error');this.closest('.client-item').classList.add('no-logo');">
+                </div>
+                <span class="client-name">${name}</span>
             </div>
         `;
     }).join('');
