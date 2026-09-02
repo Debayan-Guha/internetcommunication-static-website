@@ -374,6 +374,185 @@ select {
 }
 
 /* =====================================================
+   LANGUAGE SWITCHER
+   ===================================================== */
+
+.language-switcher {
+    position: relative;
+    display: inline-block;
+}
+
+.lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(18, 53, 91, 0.08);
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    color: var(--text);
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(4px);
+}
+
+.lang-btn:hover {
+    background: rgba(18, 53, 91, 0.12);
+    border-color: var(--accent);
+}
+
+.lang-icon {
+    font-size: 1rem;
+}
+
+.lang-current {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.lang-arrow {
+    font-size: 0.65rem;
+    opacity: 0.7;
+    transition: transform 0.3s ease;
+}
+
+.lang-btn[aria-expanded="true"] .lang-arrow {
+    transform: rotate(180deg);
+}
+
+/* =====================================================
+   LANGUAGE DROPDOWN
+   ===================================================== */
+
+.lang-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    min-width: 200px;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    padding: 6px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.lang-dropdown.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.lang-dropdown-header {
+    padding: 10px 18px 8px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+}
+
+.lang-options {
+    padding: 4px 0;
+}
+
+.lang-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 10px 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    transition: background 0.2s ease;
+    text-align: left;
+}
+
+.lang-option:hover {
+    background: var(--light);
+}
+
+.lang-option.active {
+    background: #eef4ff;
+    font-weight: 600;
+}
+
+.lang-flag {
+    font-size: 1.1rem;
+}
+
+.lang-name {
+    flex: 1;
+}
+
+.lang-check {
+    font-size: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+    color: var(--accent);
+}
+
+.lang-option.active .lang-check {
+    opacity: 1;
+}
+
+/* =====================================================
+   LANGUAGE SWITCHER - MOBILE RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 767px) {
+    .language-switcher {
+        width: 100%;
+        margin: 4px 0;
+    }
+
+    .lang-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+        background: rgba(18, 53, 91, 0.06);
+    }
+
+    .lang-dropdown {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        border: 1px solid var(--border);
+        margin-top: 4px;
+        background: var(--white);
+    }
+
+    .lang-option {
+        color: var(--text);
+    }
+
+    .lang-option:hover {
+        background: var(--light);
+    }
+
+    .lang-option.active {
+        background: #eef4ff;
+    }
+
+    .lang-dropdown-header {
+        color: var(--muted);
+        border-bottom-color: var(--border);
+    }
+}
+
+/* =====================================================
    BUTTONS
    ===================================================== */
 

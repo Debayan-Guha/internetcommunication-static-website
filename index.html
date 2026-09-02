@@ -111,7 +111,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=Poppins:wght@300;400;600;700;800;900&display=swap"
         rel="stylesheet">
 
     <!-- =====================================================
@@ -138,7 +138,6 @@
             <!-- Agency Logo -->
             <a href="#home" class="logo" aria-label="Internet Communication home">
                 <span class="logo-mark">IC</span>
-
                 <span class="logo-text">
                     <span class="logo-internet">Internet</span>
                     <span class="logo-communication">Communication</span>
@@ -154,13 +153,44 @@
 
             <!-- Navigation Menu -->
             <div class="nav-menu">
-                <a href="#home">Home</a>
-                <a href="#about">About Us</a>
-                <a href="#services">Services</a>
-                <a href="#why-us">Why Choose Us</a>
-                <a href="#process">How It Works</a>
-                <a href="#call-us" class="btn btn-primary nav-cta">Call Now</a>
-                <a href="#contact" class="btn btn-primary nav-cta">Contact Now</a>
+                <a href="#home" data-i18n="nav.home">Home</a>
+                <a href="#about" data-i18n="nav.about">About Us</a>
+                <a href="#services" data-i18n="nav.services">Services</a>
+                <a href="#why-us" data-i18n="nav.whyUs">Why Choose Us</a>
+                <a href="#process" data-i18n="nav.process">How It Works</a>
+
+                <!-- =============================================
+                     LANGUAGE SWITCHER
+                ============================================= -->
+                <div class="language-switcher" id="languageSwitcher">
+                    <button type="button" class="lang-btn" id="langToggle" aria-expanded="false">
+                        <span class="lang-icon">🌐</span>
+                        <span class="lang-current" id="currentLang">EN</span>
+                        <span class="lang-arrow">▾</span>
+                    </button>
+
+                    <!-- Language Dropdown -->
+                    <div class="lang-dropdown" id="langDropdown" aria-hidden="true">
+                        <div class="lang-dropdown-header">Select Language</div>
+                        <div class="lang-options">
+                            <!-- English -->
+                            <button class="lang-option active" data-lang="en" data-code="EN">
+                                <span class="lang-flag">🇮🇳</span>
+                                <span class="lang-name">English</span>
+                                <span class="lang-check">✅</span>
+                            </button>
+                            <!-- Bengali -->
+                            <button class="lang-option" data-lang="bn" data-code="বাংলা">
+                                <span class="lang-flag">🇮🇳</span>
+                                <span class="lang-name">বাংলা</span>
+                                <span class="lang-check"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#call-us" class="btn btn-primary nav-cta" data-i18n="nav.callNow">Call Now</a>
+                <a href="#contact" class="btn btn-primary nav-cta" data-i18n="nav.contactNow">Contact Now</a>
             </div>
         </nav>
     </header>
@@ -173,7 +203,7 @@
         <!-- =====================================================
              HERO SECTION
         ===================================================== -->
-        <section class="hero">
+        <section class="hero" id="hero">
             <!-- Decorative Shapes -->
             <div class="hero-shape shape-one"></div>
             <div class="hero-shape shape-two"></div>
@@ -181,23 +211,23 @@
             <div class="container hero-grid">
                 <!-- HERO CONTENT -->
                 <div class="hero-content">
-                    <p class="eyebrow">PROFESSIONAL MEDIA PUBLICATION SERVICES</p>
-                    <h1>Your Trusted Partner for <span>Newspaper & Media Advertising</span></h1>
-                    <p class="hero-text">We help government organizations, businesses, institutions, and individuals
+                    <p class="eyebrow" data-i18n="hero.eyebrow">PROFESSIONAL MEDIA PUBLICATION SERVICES</p>
+                    <h1 data-i18n="hero.title">Your Trusted Partner for <span>Newspaper & Media Advertising</span></h1>
+                    <p class="hero-text" data-i18n="hero.text">We help government organizations, businesses, institutions, and individuals
                         publish advertisements, notices, announcements, tenders, and other important information through
                         trusted newspaper and media channels.</p>
 
                     <!-- Hero Buttons -->
                     <div class="hero-actions">
-                        <a href="#services" class="btn btn-primary">Explore Services <span>→</span></a>
-                        <a href="#contact" class="btn btn-outline">Contact Us</a>
+                        <a href="#services" class="btn btn-primary" data-i18n="hero.exploreServices">Explore Services <span>→</span></a>
+                        <a href="#contact" class="btn btn-outline" data-i18n="hero.contactUs">Contact Us</a>
                     </div>
 
                     <!-- Trust Highlights -->
                     <div class="hero-trust">
-                        <div><strong>Professional</strong><span>Guidance</span></div>
-                        <div><strong>Reliable</strong><span>Assistance</span></div>
-                        <div><strong>Wide</strong><span>Media Reach</span></div>
+                        <div><strong data-i18n="hero.trust1">Professional</strong><span data-i18n="hero.trust1Label">Guidance</span></div>
+                        <div><strong data-i18n="hero.trust2">Reliable</strong><span data-i18n="hero.trust2Label">Assistance</span></div>
+                        <div><strong data-i18n="hero.trust3">Wide</strong><span data-i18n="hero.trust3Label">Media Reach</span></div>
                     </div>
                 </div>
 
@@ -228,8 +258,8 @@
                     </div>
 
                     <!-- Floating Information Badges -->
-                    <div class="floating-badge badge-one">✓ Trusted Service</div>
-                    <div class="floating-badge badge-two">📢 Wide Reach</div>
+                    <div class="floating-badge badge-one" data-i18n="hero.badge1">✓ Trusted Service</div>
+                    <div class="floating-badge badge-two" data-i18n="hero.badge2">📢 Wide Reach</div>
                 </div>
             </div>
         </section>
@@ -241,35 +271,35 @@
             <div class="container">
                 <!-- Section Heading -->
                 <div class="section-heading reveal">
-                    <p class="eyebrow">ABOUT OUR AGENCY</p>
-                    <h2>Reliable Support for Every <span>Publication Requirement</span></h2>
+                    <p class="eyebrow" data-i18n="about.eyebrow">ABOUT OUR AGENCY</p>
+                    <h2 data-i18n="about.title">Reliable Support for Every <span>Publication Requirement</span></h2>
                 </div>
 
                 <div class="about-grid">
                     <!-- About Text -->
                     <div class="about-copy reveal">
-                        <p>We are a professional advertising and media publication agency providing reliable assistance
+                        <p data-i18n="about.text1">We are a professional advertising and media publication agency providing reliable assistance
                             for publishing advertisements and important notices in newspapers and other media platforms.
                         </p>
-                        <p>We work with government organizations, private companies, institutions, businesses, and
+                        <p data-i18n="about.text2">We work with government organizations, private companies, institutions, businesses, and
                             individuals to help ensure their advertisements reach the appropriate audience through
                             suitable publication channels.</p>
-                        <a href="#contact" class="text-link">Discuss Your Requirement <span>→</span></a>
+                        <a href="#contact" class="text-link" data-i18n="about.cta">Discuss Your Requirement <span>→</span></a>
                     </div>
 
                     <!-- Statistics -->
                     <div class="stats-grid reveal">
                         <article class="stat-card">
                             <strong class="counter" data-target="15">8</strong>
-                            <span>+ Years Experience</span>
+                            <span data-i18n="about.stat1">+ Years Experience</span>
                         </article>
                         <article class="stat-card">
                             <strong class="counter" data-target="500">100k</strong>
-                            <span>+ Clients Served</span>
+                            <span data-i18n="about.stat2">+ Clients Served</span>
                         </article>
                         <article class="stat-card">
                             <strong class="counter" data-target="100">50</strong>
-                            <span>+ Publication Options</span>
+                            <span data-i18n="about.stat3">+ Publication Options</span>
                         </article>
                     </div>
                 </div>
@@ -278,18 +308,18 @@
                 <div class="feature-grid">
                     <article class="feature-card reveal">
                         <div class="icon">✓</div>
-                        <h3>Trusted Service</h3>
-                        <p>Professional assistance focused on reliability and clear communication.</p>
+                        <h3 data-i18n="about.feature1Title">Trusted Service</h3>
+                        <p data-i18n="about.feature1Desc">Professional assistance focused on reliability and clear communication.</p>
                     </article>
                     <article class="feature-card reveal">
                         <div class="icon">◎</div>
-                        <h3>Professional Support</h3>
-                        <p>Guidance throughout the advertisement and publication process.</p>
+                        <h3 data-i18n="about.feature2Title">Professional Support</h3>
+                        <p data-i18n="about.feature2Desc">Guidance throughout the advertisement and publication process.</p>
                     </article>
                     <article class="feature-card reveal">
                         <div class="icon">◌</div>
-                        <h3>Wide Media Reach</h3>
-                        <p>Support in identifying suitable newspaper and media options.</p>
+                        <h3 data-i18n="about.feature3Title">Wide Media Reach</h3>
+                        <p data-i18n="about.feature3Desc">Support in identifying suitable newspaper and media options.</p>
                     </article>
                 </div>
             </div>
@@ -301,22 +331,18 @@
         <section class="section section-muted" id="services">
             <div class="container">
                 <div class="section-heading centered reveal">
-                    <p class="eyebrow">WHAT WE OFFER</p>
-                    <h2>Advertising & Publication <span>Services</span></h2>
-                    <p>Our services are structured to support different publication requirements.</p>
+                    <p class="eyebrow" data-i18n="services.eyebrow">WHAT WE OFFER</p>
+                    <h2 data-i18n="services.title">Advertising & Publication <span>Services</span></h2>
+                    <p data-i18n="services.subtitle">Our services are structured to support different publication requirements.</p>
                 </div>
 
-                <!-- =================================================
-                     SERVICES GRID
-                     To add a new service: Duplicate any .service-card below.
-                ================================================= -->
                 <div class="services-grid">
 
                     <!-- Service 1 -->
                     <article class="service-card reveal">
                         <div class="service-icon">🏛</div>
-                        <h3>Government Advertising</h3>
-                        <p>
+                        <h3 data-i18n="services.s1.title">Government Advertising</h3>
+                        <p data-i18n="services.s1.desc">
                             We help government departments, municipalities, panchayats, government offices,
                             educational institutions, and other public organizations publish official
                             advertisements in newspapers. Our services include tenders, recruitment
@@ -324,28 +350,28 @@
                             notices, corrigenda, scheme announcements, departmental notices, and other
                             official communications that need to reach the public through newspapers.
                         </p>
-                        <a href="#contact">Learn More →</a>
+                        <a href="#contact" data-i18n="services.learnMore">Learn More →</a>
                     </article>
 
                     <!-- Service 2 -->
                     <article class="service-card reveal">
                         <div class="service-icon">▣</div>
-                        <h3>Business Advertising</h3>
-                        <p>
+                        <h3 data-i18n="services.s2.title">Business Advertising</h3>
+                        <p data-i18n="services.s2.desc">
                             We help businesses, companies, shops, brands, institutions, and organizations
                             promote their products, services, offers, and business activities through
                             newspaper advertisements. This includes product promotions, new business
                             announcements, corporate advertisements, dealership opportunities, service
                             promotions, special offers, events, and other commercial advertisements.
                         </p>
-                        <a href="#contact">Learn More →</a>
+                        <a href="#contact" data-i18n="services.learnMore">Learn More →</a>
                     </article>
 
                     <!-- Service 3 -->
                     <article class="service-card reveal">
                         <div class="service-icon">⚖</div>
-                        <h3>Legal & Public Notices</h3>
-                        <p>
+                        <h3 data-i18n="services.s3.title">Legal & Public Notices</h3>
+                        <p data-i18n="services.s3.desc">
                             We assist individuals, businesses, organizations, and institutions with
                             publishing legal and public notices in newspapers. This can include name
                             change notices, property-related notices, lost document notices, ownership
@@ -353,14 +379,14 @@
                             court-related publications, and other notices that need to be publicly
                             communicated through newspapers.
                         </p>
-                        <a href="#contact">Learn More →</a>
+                        <a href="#contact" data-i18n="services.learnMore">Learn More →</a>
                     </article>
 
                     <!-- Service 4 -->
                     <article class="service-card reveal">
                         <div class="service-icon">♙</div>
-                        <h3>Recruitment Advertising</h3>
-                        <p>
+                        <h3 data-i18n="services.s4.title">Recruitment Advertising</h3>
+                        <p data-i18n="services.s4.desc">
                             We help government bodies, private companies, educational institutions,
                             organizations, and other employers publish recruitment and job advertisements
                             in newspapers. This includes job vacancies, recruitment drives, walk-in
@@ -368,14 +394,14 @@
                             hiring announcements. We help arrange the required information for newspaper
                             publication and suitable audience reach.
                         </p>
-                        <a href="#contact">Learn More →</a>
+                        <a href="#contact" data-i18n="services.learnMore">Learn More →</a>
                     </article>
 
                     <!-- Service 5 -->
                     <article class="service-card reveal">
                         <div class="service-icon">📰</div>
-                        <h3>Newspaper Ad Booking</h3>
-                        <p>
+                        <h3 data-i18n="services.s5.title">Newspaper Ad Booking</h3>
+                        <p data-i18n="services.s5.desc">
                             We provide complete assistance with booking advertisements in newspapers
                             according to the client's requirements. We help clients understand newspaper
                             advertising options, select suitable publications, provide advertisement
@@ -383,28 +409,28 @@
                             booking process. Our service makes newspaper advertisement booking simple,
                             organized, and convenient.
                         </p>
-                        <a href="#contact">Learn More →</a>
+                        <a href="#contact" data-i18n="services.learnMore">Learn More →</a>
                     </article>
 
                     <!-- Service 6 -->
                     <article class="service-card reveal">
                         <div class="service-icon">✦</div>
-                        <h3>Media Consultation</h3>
-                        <p>
+                        <h3 data-i18n="services.s6.title">Media Consultation</h3>
+                        <p data-i18n="services.s6.desc">
                             We provide practical guidance to help clients choose suitable newspapers and
                             advertising options for their requirements. We help explain different types
                             of advertisements, publication options, target audiences, advertisement
                             formats, and basic placement considerations. Our goal is to make it easier
                             for clients to understand where and how their advertisement can be published.
                         </p>
-                        <a href="#contact">Learn More →</a>
+                        <a href="#contact" data-i18n="services.learnMore">Learn More →</a>
                     </article>
 
                     <!-- Service 7 -->
                     <article class="service-card reveal">
                         <div class="service-icon">📋</div>
-                        <h3>Classified Advertising</h3>
-                        <p>
+                        <h3 data-i18n="services.s7.title">Classified Advertising</h3>
+                        <p data-i18n="services.s7.desc">
                             We assist with publishing classified advertisements in newspapers for a wide
                             range of personal, business, and organizational requirements. Classified
                             advertisements can include job opportunities, property requirements, property
@@ -413,14 +439,14 @@
                             advertisements. We help clients prepare the required information and arrange
                             publication in suitable newspapers.
                         </p>
-                        <a href="#contact">Learn More →</a>
+                        <a href="#contact" data-i18n="services.learnMore">Learn More →</a>
                     </article>
 
                     <!-- Service 8 -->
                     <article class="service-card reveal">
                         <div class="service-icon">📢</div>
-                        <h3>Tender & Auction Advertising</h3>
-                        <p>
+                        <h3 data-i18n="services.s8.title">Tender & Auction Advertising</h3>
+                        <p data-i18n="services.s8.desc">
                             We assist government departments, municipalities, panchayats, companies,
                             institutions, and organizations with publishing tender and auction
                             advertisements in newspapers. This includes tender invitations, e-tender
@@ -428,14 +454,14 @@
                             advertisements, and related public notifications. We help coordinate the
                             advertisement details and newspaper publication requirements.
                         </p>
-                        <a href="#contact">Learn More →</a>
+                        <a href="#contact" data-i18n="services.learnMore">Learn More →</a>
                     </article>
 
                     <!-- Service 9 -->
                     <article class="service-card reveal">
                         <div class="service-icon">🏠</div>
-                        <h3>Property Advertising</h3>
-                        <p>
+                        <h3 data-i18n="services.s9.title">Property Advertising</h3>
+                        <p data-i18n="services.s9.desc">
                             We help individuals, businesses, developers, institutions, and organizations
                             publish property-related advertisements in newspapers. This can include
                             property sale, purchase, rental, commercial property, land-related
@@ -443,14 +469,14 @@
                             property-related public communications. We help clients arrange the required
                             information and select suitable newspaper publication options.
                         </p>
-                        <a href="#contact">Learn More →</a>
+                        <a href="#contact" data-i18n="services.learnMore">Learn More →</a>
                     </article>
 
                     <!-- Service 10 -->
                     <article class="service-card reveal">
                         <div class="service-icon">📣</div>
-                        <h3>Public Announcement Advertising</h3>
-                        <p>
+                        <h3 data-i18n="services.s10.title">Public Announcement Advertising</h3>
+                        <p data-i18n="services.s10.desc">
                             We help government bodies, organizations, institutions, businesses, and
                             individuals publish important announcements intended for the general public.
                             These may include public information, meetings, organizational announcements,
@@ -458,14 +484,14 @@
                             invitations, and other messages that need to be communicated publicly through
                             newspapers.
                         </p>
-                        <a href="#contact">Learn More →</a>
+                        <a href="#contact" data-i18n="services.learnMore">Learn More →</a>
                     </article>
 
                     <!-- Service 11 -->
                     <article class="service-card reveal">
                         <div class="service-icon">🎓</div>
-                        <h3>Educational Advertising</h3>
-                        <p>
+                        <h3 data-i18n="services.s11.title">Educational Advertising</h3>
+                        <p data-i18n="services.s11.desc">
                             We assist schools, colleges, universities, coaching institutes, training
                             centers, and other educational organizations with newspaper advertising.
                             Services can include admission announcements, course promotions, recruitment
@@ -474,14 +500,14 @@
                             communications intended for students, parents, teachers, and the general
                             public.
                         </p>
-                        <a href="#contact">Learn More →</a>
+                        <a href="#contact" data-i18n="services.learnMore">Learn More →</a>
                     </article>
 
                     <!-- Service 12 -->
                     <article class="service-card reveal">
                         <div class="service-icon">🎉</div>
-                        <h3>Event & Promotional Advertising</h3>
-                        <p>
+                        <h3 data-i18n="services.s12.title">Event & Promotional Advertising</h3>
+                        <p data-i18n="services.s12.desc">
                             We help businesses, organizations, institutions, and individuals promote
                             events, programs, campaigns, exhibitions, launches, special offers, cultural
                             activities, public programs, and other important occasions through newspaper
@@ -489,14 +515,14 @@
                             selecting suitable publication options so the message can reach the intended
                             audience.
                         </p>
-                        <a href="#contact">Learn More →</a>
+                        <a href="#contact" data-i18n="services.learnMore">Learn More →</a>
                     </article>
 
                     <!-- Service 13 -->
                     <article class="service-card reveal">
                         <div class="service-icon">👤</div>
-                        <h3>Personal & Individual Advertising</h3>
-                        <p>
+                        <h3 data-i18n="services.s13.title">Personal & Individual Advertising</h3>
+                        <p data-i18n="services.s13.desc">
                             We assist individuals with different types of personal newspaper
                             advertisements and public notices. These may include name change
                             advertisements, lost document notices, matrimonial advertisements, public
@@ -504,14 +530,14 @@
                             personal communications. We help individuals understand the publication
                             requirements and arrange their advertisements in suitable newspapers.
                         </p>
-                        <a href="#contact">Learn More →</a>
+                        <a href="#contact" data-i18n="services.learnMore">Learn More →</a>
                     </article>
 
                     <!-- Service 14 -->
                     <article class="service-card reveal">
                         <div class="service-icon">✎</div>
-                        <h3>Advertisement Design & Formatting</h3>
-                        <p>
+                        <h3 data-i18n="services.s14.title">Advertisement Design & Formatting</h3>
+                        <p data-i18n="services.s14.desc">
                             We help clients organize and prepare their advertisement information in a
                             clear and newspaper-friendly format before publication. This can include
                             arranging text, important details, headings, contact information, and other
@@ -519,36 +545,29 @@
                             that the advertisement information is presented clearly and is ready for the
                             newspaper publication process.
                         </p>
-                        <a href="#contact">Learn More →</a>
+                        <a href="#contact" data-i18n="services.learnMore">Learn More →</a>
                     </article>
 
                 </div>
             </div>
         </section>
 
-
         <!-- =====================================================
-     MEDIA PARTNERS / CLIENTS SECTION
-===================================================== -->
-
+             MEDIA PARTNERS / CLIENTS SECTION
+        ===================================================== -->
         <section class="section partners-section" id="partners">
             <div class="container">
                 <div class="section-heading centered reveal">
-                    <p class="eyebrow">TRUSTED MEDIA HOUSES</p>
-                    <h2>Our <span>Media Partners</span></h2>
-                    <p>We work with leading newspapers and media publications</p>
+                    <p class="eyebrow" data-i18n="partners.eyebrow">TRUSTED MEDIA HOUSES</p>
+                    <h2 data-i18n="partners.title">Our <span>Media Partners</span></h2>
+                    <p data-i18n="partners.subtitle">We work with leading newspapers and media publications</p>
                 </div>
             </div>
 
-            <!-- Partner Logos - Single Scrolling Track -->
             <div class="partners-track-wrapper">
-                <div class="partners-track" id="partnerTrack">
-                    <!-- Logos will be inserted here by JavaScript -->
-                </div>
+                <div class="partners-track" id="partnerTrack"></div>
             </div>
         </section>
-
-
 
         <!-- =====================================================
              WHO WE SERVE SECTION
@@ -556,64 +575,54 @@
         <section class="section" id="clients">
             <div class="container">
                 <div class="section-heading reveal">
-                    <p class="eyebrow">WHO WE SERVE</p>
-                    <h2>Solutions for Different <span>Types of Clients</span></h2>
+                    <p class="eyebrow" data-i18n="clients.eyebrow">WHO WE SERVE</p>
+                    <h2 data-i18n="clients.title">Solutions for Different <span>Types of Clients</span></h2>
                 </div>
 
                 <div class="client-grid">
                     <article class="client-card reveal">
                         <span>01</span>
-                        <h3>Government Organizations</h3>
-                        <p>Government departments and public institutions.</p>
+                        <h3 data-i18n="clients.c1">Government Organizations</h3>
+                        <p data-i18n="clients.c1Desc">Government departments and public institutions.</p>
                     </article>
                     <article class="client-card reveal">
                         <span>02</span>
-                        <h3>Businesses & Companies</h3>
-                        <p>Private companies, startups, and established businesses.</p>
+                        <h3 data-i18n="clients.c2">Businesses & Companies</h3>
+                        <p data-i18n="clients.c2Desc">Private companies, startups, and established businesses.</p>
                     </article>
                     <article class="client-card reveal">
                         <span>03</span>
-                        <h3>Organizations & Institutions</h3>
-                        <p>Educational institutions, NGOs, associations, and other organizations.</p>
+                        <h3 data-i18n="clients.c3">Organizations & Institutions</h3>
+                        <p data-i18n="clients.c3Desc">Educational institutions, NGOs, associations, and other organizations.</p>
                     </article>
                     <article class="client-card reveal">
                         <span>04</span>
-                        <h3>Individuals</h3>
-                        <p>Individuals needing personal, legal, or public notices.</p>
+                        <h3 data-i18n="clients.c4">Individuals</h3>
+                        <p data-i18n="clients.c4Desc">Individuals needing personal, legal, or public notices.</p>
                     </article>
                 </div>
             </div>
         </section>
 
-
         <!-- =====================================================
-     ORGANIZATIONS WE HAVE SERVED
-===================================================== -->
-
+             ORGANIZATIONS WE HAVE SERVED
+        ===================================================== -->
         <section class="section section-muted clients-served-section" id="served-clients">
             <div class="container">
                 <div class="section-heading centered reveal">
-                    <p class="eyebrow">OUR EXPERIENCE</p>
-                    <h2>Organizations We've <span>Worked With</span></h2>
-                    <p>
+                    <p class="eyebrow" data-i18n="served.eyebrow">OUR EXPERIENCE</p>
+                    <h2 data-i18n="served.title">Organizations We've <span>Worked With</span></h2>
+                    <p data-i18n="served.subtitle">
                         Supporting organizations, institutions, businesses,
                         and clients with their advertising and publication requirements.
                     </p>
                 </div>
             </div>
 
-            <!-- CLIENT LOGO SCROLLING TRACK -->
-
             <div class="clients-track-wrapper">
-                <div class="clients-track" id="clientTrack">
-                    <!--
-                Client logos will be added dynamically
-                through JavaScript
-            -->
-                </div>
+                <div class="clients-track" id="clientTrack"></div>
             </div>
         </section>
-
 
         <!-- =====================================================
              HOW IT WORKS SECTION
@@ -621,45 +630,40 @@
         <section class="section section-dark" id="process">
             <div class="container">
                 <div class="section-heading centered reveal">
-                    <p class="eyebrow light">SIMPLE & TRANSPARENT</p>
-                    <h2>How <span>It Works</span></h2>
-                    <p>From your first enquiry to publication, we help guide the process.</p>
+                    <p class="eyebrow light" data-i18n="process.eyebrow">SIMPLE & TRANSPARENT</p>
+                    <h2 data-i18n="process.title">How <span>It Works</span></h2>
+                    <p data-i18n="process.subtitle">From your first enquiry to publication, we help guide the process.</p>
                 </div>
 
                 <div class="timeline">
-                    <!-- Step 1 -->
                     <article class="step reveal">
                         <span>1</span>
-                        <h3>Contact Us</h3>
-                        <p>Contact our team and explain your advertising or publication requirement.</p>
+                        <h3 data-i18n="process.step1">Contact Us</h3>
+                        <p data-i18n="process.step1Desc">Contact our team and explain your advertising or publication requirement.</p>
                     </article>
 
-                    <!-- Step 2 -->
                     <article class="step reveal">
                         <span>2</span>
-                        <h3>Share Requirement</h3>
-                        <p>Provide advertisement content, notice details, or publication requirements.</p>
+                        <h3 data-i18n="process.step2">Share Requirement</h3>
+                        <p data-i18n="process.step2Desc">Provide advertisement content, notice details, or publication requirements.</p>
                     </article>
 
-                    <!-- Step 3 -->
                     <article class="step reveal">
                         <span>3</span>
-                        <h3>Choose Options</h3>
-                        <p>We help identify suitable newspaper or media publication options.</p>
+                        <h3 data-i18n="process.step3">Choose Options</h3>
+                        <p data-i18n="process.step3Desc">We help identify suitable newspaper or media publication options.</p>
                     </article>
 
-                    <!-- Step 4 -->
                     <article class="step reveal">
                         <span>4</span>
-                        <h3>Processing</h3>
-                        <p>The advertisement is prepared and processed according to selected requirements.</p>
+                        <h3 data-i18n="process.step4">Processing</h3>
+                        <p data-i18n="process.step4Desc">The advertisement is prepared and processed according to selected requirements.</p>
                     </article>
 
-                    <!-- Step 5 -->
                     <article class="step reveal">
                         <span>5</span>
-                        <h3>Publication</h3>
-                        <p>The advertisement or notice is published through the appropriate media channel.</p>
+                        <h3 data-i18n="process.step5">Publication</h3>
+                        <p data-i18n="process.step5Desc">The advertisement or notice is published through the appropriate media channel.</p>
                     </article>
                 </div>
             </div>
@@ -670,25 +674,22 @@
         ===================================================== -->
         <section class="section" id="why-us">
             <div class="container why-grid">
-                <!-- Left Content -->
                 <div class="why-copy reveal">
-                    <p class="eyebrow">WHY CHOOSE US</p>
-                    <h2>A Professional Partner for <span>Important Publications</span></h2>
-                    <p>We focus on making communication straightforward and helping clients understand their available
-                        publication options.</p>
-                    <a href="#contact" class="btn btn-primary">Talk to Our Team</a>
+                    <p class="eyebrow" data-i18n="why.eyebrow">WHY CHOOSE US</p>
+                    <h2 data-i18n="why.title">A Professional Partner for <span>Important Publications</span></h2>
+                    <p data-i18n="why.text">We focus on making communication straightforward and helping clients understand their available publication options.</p>
+                    <a href="#contact" class="btn btn-primary" data-i18n="why.cta">Talk to Our Team</a>
                 </div>
 
-                <!-- Benefits -->
                 <div class="check-list reveal">
-                    <div>✓ Professional Service</div>
-                    <div>✓ Reliable Assistance</div>
-                    <div>✓ Government & Private Client Support</div>
-                    <div>✓ Media Publication Expertise</div>
-                    <div>✓ Easy Communication</div>
-                    <div>✓ Personalized Guidance</div>
-                    <div>✓ Transparent Process</div>
-                    <div>✓ Wide Range of Services</div>
+                    <div data-i18n="why.b1">✓ Professional Service</div>
+                    <div data-i18n="why.b2">✓ Reliable Assistance</div>
+                    <div data-i18n="why.b3">✓ Government & Private Client Support</div>
+                    <div data-i18n="why.b4">✓ Media Publication Expertise</div>
+                    <div data-i18n="why.b5">✓ Easy Communication</div>
+                    <div data-i18n="why.b6">✓ Personalized Guidance</div>
+                    <div data-i18n="why.b7">✓ Transparent Process</div>
+                    <div data-i18n="why.b8">✓ Wide Range of Services</div>
                 </div>
             </div>
         </section>
@@ -698,40 +699,27 @@
         ===================================================== -->
         <section class="cta-section" id="call-us">
             <div class="container cta-content reveal">
-                <!-- CTA TEXT -->
                 <div>
-                    <p class="eyebrow light">LET'S GET STARTED</p>
-                    <h2>Need to Publish an Advertisement or Notice?</h2>
-                    <p>Contact our team today to discuss your newspaper and media publication requirements.</p>
+                    <p class="eyebrow light" data-i18n="cta.eyebrow">LET'S GET STARTED</p>
+                    <h2 data-i18n="cta.title">Need to Publish an Advertisement or Notice?</h2>
+                    <p data-i18n="cta.text">Contact our team today to discuss your newspaper and media publication requirements.</p>
                 </div>
 
-                <!-- CTA BUTTONS -->
                 <div class="cta-actions">
-                    <!-- =================================================
-                         CALL US DROPDOWN
-                    ================================================= -->
                     <div class="call-dropdown-wrapper" id="callDropdownWrapper">
-                        <!-- CALL BUTTON -->
                         <button type="button" class="btn btn-light call-dropdown-button" id="callDropdownButton"
                             aria-expanded="false" aria-controls="callDropdown">
-                            <span>☎ Call Us Now</span>
+                            <span data-i18n="cta.callNow">☎ Call Us Now</span>
                             <span class="call-dropdown-arrow" aria-hidden="true">▾</span>
                         </button>
 
-                        <!-- =============================================
-                             PHONE NUMBER DROPDOWN
-                             Numbers are generated dynamically from js/main.js
-                        ============================================== -->
                         <div class="call-dropdown" id="callDropdown" aria-hidden="true">
-                            <div class="call-dropdown-header">Select a number</div>
-                            <div class="call-dropdown-list" id="callDropdownList">
-                                <!-- Numbers added by JavaScript -->
-                            </div>
+                            <div class="call-dropdown-header" data-i18n="cta.selectNumber">Select a number</div>
+                            <div class="call-dropdown-list" id="callDropdownList"></div>
                         </div>
                     </div>
 
-                    <!-- CONTACT BUTTON -->
-                    <a href="#contact" class="btn btn-outline-light">Contact Us</a>
+                    <a href="#contact" class="btn btn-outline-light" data-i18n="cta.contactUs">Contact Us</a>
                 </div>
             </div>
         </section>
@@ -741,72 +729,60 @@
         ===================================================== -->
         <section class="section section-muted" id="faq">
             <div class="container faq-layout">
-                <!-- FAQ Heading -->
                 <div class="section-heading reveal">
-                    <p class="eyebrow">FREQUENTLY ASKED QUESTIONS</p>
-                    <h2>Questions? <span>We Can Help.</span></h2>
-                    <p>Find quick answers to common questions about our services.</p>
+                    <p class="eyebrow" data-i18n="faq.eyebrow">FREQUENTLY ASKED QUESTIONS</p>
+                    <h2 data-i18n="faq.title">Questions? <span>We Can Help.</span></h2>
+                    <p data-i18n="faq.subtitle">Find quick answers to common questions about our services.</p>
                 </div>
 
-                <!-- FAQ Accordion -->
                 <div class="faq-list reveal">
-                    <!-- FAQ 1 -->
                     <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
+                        <button class="faq-question" aria-expanded="false" data-i18n="faq.q1">
                             What types of advertisements can you help publish?
                             <span>+</span>
                         </button>
                         <div class="faq-answer">
-                            <p>We can assist with various advertisement, notice, announcement, recruitment, tender,
-                                business, and public publication requirements.</p>
+                            <p data-i18n="faq.a1">We can assist with various advertisement, notice, announcement, recruitment, tender, business, and public publication requirements.</p>
                         </div>
                     </div>
 
-                    <!-- FAQ 2 -->
                     <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
+                        <button class="faq-question" aria-expanded="false" data-i18n="faq.q2">
                             Do you provide services for government organizations?
                             <span>+</span>
                         </button>
                         <div class="faq-answer">
-                            <p>Yes. The agency can support government departments and public institutions with
-                                applicable publication requirements.</p>
+                            <p data-i18n="faq.a2">Yes. The agency can support government departments and public institutions with applicable publication requirements.</p>
                         </div>
                     </div>
 
-                    <!-- FAQ 3 -->
                     <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
+                        <button class="faq-question" aria-expanded="false" data-i18n="faq.q3">
                             Can individuals publish public or legal notices?
                             <span>+</span>
                         </button>
                         <div class="faq-answer">
-                            <p>Yes. Individuals can contact the agency to discuss personal, public, or legal notice
-                                requirements.</p>
+                            <p data-i18n="faq.a3">Yes. Individuals can contact the agency to discuss personal, public, or legal notice requirements.</p>
                         </div>
                     </div>
 
-                    <!-- FAQ 4 -->
                     <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
+                        <button class="faq-question" aria-expanded="false" data-i18n="faq.q4">
                             How can I contact your team?
                             <span>+</span>
                         </button>
                         <div class="faq-answer">
-                            <p>You can call, email, or use WhatsApp to contact our team regarding your advertisement or
-                                publication requirements.</p>
+                            <p data-i18n="faq.a4">You can call, email, or use WhatsApp to contact our team regarding your advertisement or publication requirements.</p>
                         </div>
                     </div>
 
-                    <!-- FAQ 5 -->
                     <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
+                        <button class="faq-question" aria-expanded="false" data-i18n="faq.q5">
                             How long does the publication process take?
                             <span>+</span>
                         </button>
                         <div class="faq-answer">
-                            <p>The timeline depends on the publication type, newspaper or media selection, approval
-                                requirements, and submission deadlines.</p>
+                            <p data-i18n="faq.a5">The timeline depends on the publication type, newspaper or media selection, approval requirements, and submission deadlines.</p>
                         </div>
                     </div>
                 </div>
@@ -818,60 +794,46 @@
         ===================================================== -->
         <section class="section contact-section" id="contact">
             <div class="container">
-                <!-- Section Heading -->
                 <div class="section-heading centered reveal">
-                    <p class="eyebrow">CONTACT US</p>
-                    <h2>Let's Discuss Your <span>Requirement</span></h2>
-                    <p>Tell us what you need to publish and our team can guide you.</p>
+                    <p class="eyebrow" data-i18n="contact.eyebrow">CONTACT US</p>
+                    <h2 data-i18n="contact.title">Let's Discuss Your <span>Requirement</span></h2>
+                    <p data-i18n="contact.subtitle">Tell us what you need to publish and our team can guide you.</p>
                 </div>
 
-                <!-- =================================================
-                     CONTACT INFORMATION
-                     Form has been removed, so the contact information
-                     is now displayed as a clean centered card.
-                ================================================= -->
                 <div class="contact-single">
                     <div class="contact-info reveal">
-                        <!-- Contact Intro -->
                         <div class="contact-intro">
-                            <p class="contact-intro-label">GET IN TOUCH</p>
-                            <h3>We're Here to Help</h3>
-                            <p>Whether you need a newspaper advertisement, government notice, business advertisement,
-                                legal notice, or any other publication service, contact our team and we'll guide you
-                                through the process.</p>
+                            <p class="contact-intro-label" data-i18n="contact.introLabel">GET IN TOUCH</p>
+                            <h3 data-i18n="contact.introTitle">We're Here to Help</h3>
+                            <p data-i18n="contact.introText">Whether you need a newspaper advertisement, government notice, business advertisement, legal notice, or any other publication service, contact our team and we'll guide you through the process.</p>
                         </div>
 
-                        <!-- Contact Details -->
                         <div class="contact-details">
-                            <!-- Email -->
                             <div class="contact-item">
                                 <div class="contact-item-icon">✉</div>
                                 <div>
-                                    <span>EMAIL</span>
+                                    <span data-i18n="contact.emailLabel">EMAIL</span>
                                     <a class="js-email-link" href="mailto:icadvt@gmail.com">icadvt@gmail.com</a>
                                 </div>
                             </div>
 
-                            <!-- Address -->
                             <div class="contact-item">
                                 <div class="contact-item-icon">⌖</div>
                                 <div>
-                                    <span>OFFICE ADDRESS</span>
-                                    <p class="js-address">Panihati, Kolkata, West Bengal, India</p>
+                                    <span data-i18n="contact.addressLabel">OFFICE ADDRESS</span>
+                                    <p class="js-address" data-i18n="contact.address">Panihati, Kolkata, West Bengal, India</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Business Hours -->
                         <div class="contact-note">
-                            <strong>Business Hours</strong>
-                            <p>Monday – Sunday: 10:00 AM – 7:00 PM</p>
+                            <strong data-i18n="contact.hoursLabel">Business Hours</strong>
+                            <p data-i18n="contact.hours">Monday – Sunday: 10:00 AM – 7:00 PM</p>
                         </div>
 
-                        <!-- Contact CTA -->
                         <div class="contact-actions">
-                            <a href="mailto:icadvt@gmail.com" class="btn btn-light">✉ Send Email</a>
-                            <a href="#home" class="btn btn-outline-light">Back to Home</a>
+                            <a href="mailto:icadvt@gmail.com" class="btn btn-light" data-i18n="contact.emailBtn">✉ Send Email</a>
+                            <a href="#home" class="btn btn-outline-light" data-i18n="contact.backBtn">Back to Home</a>
                         </div>
                     </div>
                 </div>
@@ -885,51 +847,46 @@
     ===================================================== -->
     <footer class="footer">
         <div class="container footer-grid">
-            <!-- Agency Information -->
             <div>
                 <a href="#home" class="logo footer-logo">
                     <span class="logo-mark">IC</span>
                     <span>Internet<span>Communication</span></span>
                 </a>
-                <p>Professional assistance for newspaper advertising and media publication requirements.</p>
+                <p data-i18n="footer.tagline">Professional assistance for newspaper advertising and media publication requirements.</p>
             </div>
 
-            <!-- Quick Links -->
             <div>
-                <h4>Quick Links</h4>
-                <a href="#about">About Us</a>
-                <a href="#services">Services</a>
-                <a href="#why-us">Why Choose Us</a>
-                <a href="#process">How It Works</a>
+                <h4 data-i18n="footer.quickLinks">Quick Links</h4>
+                <a href="#about" data-i18n="footer.about">About Us</a>
+                <a href="#services" data-i18n="footer.services">Services</a>
+                <a href="#why-us" data-i18n="footer.whyUs">Why Choose Us</a>
+                <a href="#process" data-i18n="footer.process">How It Works</a>
             </div>
 
-            <!-- Services -->
             <div>
-                <h4>Services</h4>
-                <a href="#services">Government Advertising</a>
-                <a href="#services">Business Advertising</a>
-                <a href="#services">Legal & Public Notices</a>
-                <a href="#services">Recruitment Advertising</a>
-                <a href="#services">Newspaper Ad Booking</a>
-                <a href="#services">Media Consultation</a>
-                <a href="#services">Classified Advertising</a>
-                <a href="#services">Tender & Auction Advertising</a>
-                <a href="#services">Property Advertising</a>
-                <a href="#services">Public Announcement Advertising</a>
-                <a href="#services">Educational Advertising</a>
-                <a href="#services">Event & Promotional Advertising</a>
-                <a href="#services">Personal & Individual Advertising</a>
-                <a href="#services">Advertisement Design & Formatting</a>
+                <h4 data-i18n="footer.servicesTitle">Services</h4>
+                <a href="#services" data-i18n="footer.s1">Government Advertising</a>
+                <a href="#services" data-i18n="footer.s2">Business Advertising</a>
+                <a href="#services" data-i18n="footer.s3">Legal & Public Notices</a>
+                <a href="#services" data-i18n="footer.s4">Recruitment Advertising</a>
+                <a href="#services" data-i18n="footer.s5">Newspaper Ad Booking</a>
+                <a href="#services" data-i18n="footer.s6">Media Consultation</a>
+                <a href="#services" data-i18n="footer.s7">Classified Advertising</a>
+                <a href="#services" data-i18n="footer.s8">Tender & Auction Advertising</a>
+                <a href="#services" data-i18n="footer.s9">Property Advertising</a>
+                <a href="#services" data-i18n="footer.s10">Public Announcement Advertising</a>
+                <a href="#services" data-i18n="footer.s11">Educational Advertising</a>
+                <a href="#services" data-i18n="footer.s12">Event & Promotional Advertising</a>
+                <a href="#services" data-i18n="footer.s13">Personal & Individual Advertising</a>
+                <a href="#services" data-i18n="footer.s14">Advertisement Design & Formatting</a>
             </div>
 
-            <!-- Contact Details -->
             <div>
-                <h4>Contact</h4>
+                <h4 data-i18n="footer.contactTitle">Contact</h4>
                 <a class="js-phone-link" href="tel:+919830086004">+91 98300 86004</a>
                 <a class="js-email-link" href="mailto:icadvt@gmail.com">icadvt@gmail.com</a>
-                <p class="js-address">Panihati, Kolkata, West Bengal, India</p>
+                <p class="js-address" data-i18n="footer.address">Panihati, Kolkata, West Bengal, India</p>
 
-                <!-- Social Media -->
                 <div class="socials">
                     <a href="#" aria-label="Facebook">f</a>
                     <a href="#" aria-label="LinkedIn">in</a>
@@ -939,12 +896,11 @@
             </div>
         </div>
 
-        <!-- Copyright -->
         <div class="footer-bottom">
             <div class="container">
                 © <span id="year"></span>
                 <span class="js-agency-name">Internet Communication</span>.
-                All Rights Reserved.
+                <span data-i18n="footer.rights">All Rights Reserved.</span>
             </div>
         </div>
     </footer>
