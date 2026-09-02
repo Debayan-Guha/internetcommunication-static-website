@@ -250,6 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initMediaPartners();
     initClientsServed();
     initLanguageSwitcher(); // Initialize language switcher
+    initMapTracking();
 });
 
 /* ============================================================
@@ -1842,6 +1843,20 @@ function initLanguageSwitcher() {
     console.log('🌐 Language Switcher ready! (English & Bengali)');
 }
 
+/* ============================================================
+   MAP CLICK TRACKING
+   ============================================================ */
+
+function initMapTracking() {
+    const mapIframe = document.querySelector('.map-container iframe');
+    
+    if (mapIframe) {
+        // When user clicks on the map, track it
+        mapIframe.addEventListener('load', function() {
+            console.log('🗺️ Map loaded successfully');
+        });
+    }
+}
 /* ============================================================
    END OF MAIN.JS
    ============================================================ */
